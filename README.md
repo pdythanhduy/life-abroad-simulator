@@ -66,6 +66,52 @@ Vite sẽ in 2-3 URL:
 - [ ] Refresh giữa game không bị clip do address bar Safari (dùng `100dvh`).
 - [ ] Không scroll ngang ở bất kỳ screen nào.
 
+## Deploy on Vercel
+
+Vercel host static site miễn phí, có CDN toàn cầu, auto-deploy mỗi lần push. Project này không cần backend, không có env secret — deploy 1 click.
+
+### Lần đầu setup (~3 phút)
+
+1. Mở https://vercel.com → **Sign Up** → chọn **Continue with GitHub** → cho phép Vercel access (chỉ chọn repo `life-abroad-simulator` cho gọn).
+2. Vào dashboard → bấm **Add New… → Project**.
+3. Tìm `life-abroad-simulator` trong danh sách → bấm **Import**.
+4. Màn config: Vercel tự detect Vite. Giữ nguyên mọi default:
+   - Framework Preset: **Vite**
+   - Build Command: `npm run build`
+   - Output Directory: `dist`
+   - Install Command: `npm install`
+5. Bấm **Deploy**. Đợi ~30 giây.
+6. Xong sẽ có URL kiểu `https://life-abroad-simulator-<random>.vercel.app` — bấm **Visit**.
+
+### Auto-redeploy
+
+- Mỗi `git push origin main` → Vercel tự rebuild + redeploy. URL chính không đổi.
+- Mỗi pull request nhận thêm 1 URL preview riêng (vd `…-git-feature-x.vercel.app`) để test trước khi merge.
+
+### Custom domain (tuỳ chọn)
+
+Vercel dashboard → Project → **Settings → Domains → Add**. Nếu domain mua ở nơi khác, làm theo hướng dẫn DNS Vercel hiện ra.
+
+### File config liên quan
+
+- `vercel.json` — SPA fallback rewrite. Mọi URL không khớp file thật trong `dist/` đều rewrite về `/index.html`. Nhờ vậy refresh tại bất kỳ đường dẫn nào cũng load được app, không 404.
+- `vite.config.ts` — `target: "es2020"`, `sourcemap: false`. Bundle production gọn, không lộ source code khi inspect.
+- `index.html` — title, description, og tags, theme-color, favicon SVG (`/favicon.svg`).
+
+## Save / LocalStorage limitations
+
+Game không có backend. Toàn bộ tiến trình lưu trong **localStorage của trình duyệt**. Hệ quả người chơi cần biết:
+
+- **Save không đồng bộ giữa thiết bị**: chơi trên điện thoại không nhìn thấy save trên máy tính, và ngược lại.
+- **Save không đồng bộ giữa trình duyệt**: Chrome ≠ Safari ≠ Firefox dù cùng máy.
+- **Clear browsing data → mất save** (xoá cookies/site data của trang này cũng xoá save).
+- **Chế độ ẩn danh / private**: localStorage bị reset khi đóng tab.
+- **Storage limit**: ~5–10 MB tuỳ trình duyệt. Save game này chỉ vài KB nên không lo đầy.
+
+Không có cloud sync trong MVP. Có thể thêm trong V2+ (vd Supabase free tier) nếu thực sự cần share save giữa thiết bị — nhưng kéo theo backend, auth, account → nghĩ kỹ trước khi làm.
+
+Trong app: Settings → **Reset toàn bộ** xoá save thủ công.
+
 ## Cấu trúc
 
 ```
