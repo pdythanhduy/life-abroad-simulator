@@ -23,8 +23,8 @@ export default function StatsBar({ stats, day }: { stats: Stats; day: number }) 
           const pct = Math.max(0, Math.min(100, v));
           const danger = it.bad ? v > 70 : v < 25;
           return (
-            <div key={it.key} className="flex flex-col items-center">
-              <div className="text-[10px] text-soft mb-1">
+            <div key={it.key} className="flex flex-col items-center min-w-0">
+              <div className="text-[10px] text-soft mb-1 whitespace-nowrap leading-none">
                 {it.icon} {it.label}
               </div>
               <div className="w-full h-1.5 bg-line rounded-full overflow-hidden">
@@ -35,7 +35,7 @@ export default function StatsBar({ stats, day }: { stats: Stats; day: number }) 
                   style={{ width: `${pct}%` }}
                 />
               </div>
-              <div className="text-[10px] mt-0.5 text-soft">{Math.round(v)}</div>
+              <div className="text-[10px] mt-1 text-soft tabular-nums">{Math.round(v)}</div>
             </div>
           );
         })}

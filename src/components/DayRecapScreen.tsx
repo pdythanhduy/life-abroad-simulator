@@ -29,7 +29,7 @@ export default function DayRecapScreen({
   const isLastDay = recap.day === 7;
   return (
     <div className="flex flex-col h-full bg-gradient-to-b from-[#06080d] to-[#10131c]">
-      <div className="flex-1 px-6 pt-14 overflow-y-auto scrollbar-thin animate-fade-up">
+      <div className="flex-1 px-5 pt-12 overflow-y-auto scrollbar-thin animate-fade-up">
         <div className="text-[10px] tracking-[0.3em] text-soft mb-2">
           {isLastDay ? "TUẦN ĐẦU KẾT THÚC" : "DAY KẾT THÚC"}
         </div>
@@ -42,7 +42,7 @@ export default function DayRecapScreen({
             : "Bạn vừa khép lại một ngày. Mai dậy lại."}
         </div>
 
-        <div className="mt-8 space-y-2">
+        <div className="mt-6 space-y-2">
           {ROWS.map((r) => {
             const d = delta(recap.before, recap.after, r.key);
             const good = r.inverted ? d < 0 : d > 0;
@@ -52,17 +52,17 @@ export default function DayRecapScreen({
             return (
               <div
                 key={r.key}
-                className="flex items-center justify-between border border-line rounded-xl px-4 py-3 bg-panel"
+                className="flex items-center justify-between gap-2 border border-line rounded-xl px-3 py-3 bg-panel"
               >
-                <div className="flex items-center gap-3">
-                  <span className="w-6 text-center">{r.icon}</span>
-                  <span className="text-sm">{r.label}</span>
+                <div className="flex items-center gap-2 min-w-0">
+                  <span className="w-5 text-center shrink-0">{r.icon}</span>
+                  <span className="text-sm truncate">{r.label}</span>
                 </div>
-                <div className="flex items-center gap-3 text-sm">
+                <div className="flex items-center gap-2 text-sm shrink-0 tabular-nums">
                   <span className="text-soft">{Math.round(recap.before[r.key])}</span>
                   <span className="text-soft">→</span>
                   <span>{Math.round(recap.after[r.key])}</span>
-                  <span className={`tabular-nums w-10 text-right ${color}`}>
+                  <span className={`w-10 text-right ${color}`}>
                     {d === 0 ? "—" : `${sign}${d}`}
                   </span>
                 </div>
@@ -76,10 +76,10 @@ export default function DayRecapScreen({
         </div>
       </div>
 
-      <div className="px-6 pb-10 pt-4 border-t border-line bg-panel/50">
+      <div className="px-5 pt-4 pb-safe-lg border-t border-line bg-panel/50">
         <button
           onClick={onContinue}
-          className="w-full py-3 rounded-xl bg-accent text-ink font-medium"
+          className="w-full py-3 rounded-xl bg-accent text-ink font-medium min-h-[48px]"
         >
           {isLastDay ? "Xem kết thúc →" : `Tiếp tục Day ${recap.day + 1} →`}
         </button>

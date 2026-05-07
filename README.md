@@ -25,9 +25,46 @@ Mở: http://localhost:5173 → DevTools (F12) → Toggle device toolbar → iPh
 | Lệnh | Tác dụng |
 |---|---|
 | `npm run dev` | Vite dev server có hot reload |
+| `npm run dev -- --host` | Như trên + expose ra LAN (test bằng điện thoại thật) |
 | `npm run validate` | Check `events.json` (id, refs, flags, day coverage) — exit code khác 0 nếu lỗi |
 | `npm run build` | Validate + tsc --noEmit + vite build (build refuse to ship nếu validate fail) |
 | `npm run preview` | Serve bundle production để test bundle thật |
+
+## Mobile local test
+
+Test trên thiết bị thật (Android/iOS) trong cùng mạng Wi-Fi:
+
+```powershell
+cd $env:USERPROFILE\Desktop\life-abroad-simulator
+npm run dev -- --host
+```
+
+Vite sẽ in 2-3 URL:
+
+```
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: http://192.168.x.x:5173/
+```
+
+1. Lấy URL **Network** (không phải localhost).
+2. Trên điện thoại, bật cùng Wi-Fi với máy tính, mở trình duyệt → paste URL.
+3. Lần đầu Windows có thể bật firewall prompt — chọn **Allow access**. Nếu không hỏi, mở Windows Defender Firewall → cho phép Node.js trên Private network.
+4. Trên iOS Safari, tap "Add to Home Screen" để chạy fullscreen (không có address bar).
+
+**Test tối thiểu trên 2 kích cỡ:**
+
+- iPhone SE / Android nhỏ: **360×640** (Chrome DevTools cũng được)
+- iPhone Pro Max: **430×932**
+
+**Checklist mobile UX (sau Sprint 5):**
+
+- [ ] Tap target ← và ≡ trong ChatScreen ≥ 44×44 px (chạm bằng ngón cái không bị trượt).
+- [ ] StatsBar 5 cột không vỡ; label "🔥 Stress" không xuống dòng.
+- [ ] Choice button đủ wrap với text Japanese dài (vd "「半分だけならできます。」").
+- [ ] DayRecap row không tràn ngang khi delta là 3-digit (vd `+100`).
+- [ ] Bottom button (Tiếp tục, Chơi lại, Chọn độ khó) không sát với home indicator của iPhone — có safe-area padding.
+- [ ] Refresh giữa game không bị clip do address bar Safari (dùng `100dvh`).
+- [ ] Không scroll ngang ở bất kỳ screen nào.
 
 ## Cấu trúc
 

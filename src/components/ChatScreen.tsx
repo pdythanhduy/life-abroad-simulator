@@ -61,20 +61,22 @@ export default function ChatScreen({
 
   return (
     <div className={`flex flex-col h-full bg-gradient-to-b ${bg}`}>
-      <div className="flex items-center justify-between px-3 py-2 bg-panel/70 border-b border-line">
+      <div className="flex items-center justify-between px-2 bg-panel/70 border-b border-line">
         <button
           onClick={() => setScreen("home")}
-          className="text-soft text-sm flex items-center gap-1"
+          className="text-soft text-sm flex items-center gap-1 min-h-[44px] px-2"
           aria-label="Back to home (auto-saved)"
           title="Quay về Home — game đã tự lưu"
         >
           <span>←</span>
           <span className="text-[10px] text-soft/70 leading-none">tự lưu</span>
         </button>
-        <div className="text-sm truncate max-w-[55%]">{event?.senderName ?? "—"}</div>
+        <div className="text-sm truncate flex-1 text-center px-2 min-w-0">
+          {event?.senderName ?? "—"}
+        </div>
         <button
           onClick={() => setScreen("history")}
-          className="text-soft text-sm"
+          className="text-soft text-lg min-h-[44px] min-w-[44px] flex items-center justify-center"
           aria-label="History"
           title="Nhật ký các lựa chọn"
         >

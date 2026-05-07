@@ -42,27 +42,27 @@ export default function HomeScreen({
         </div>
       </div>
 
-      <div className="px-6 pb-10 space-y-2">
+      <div className="px-6 pb-safe-lg space-y-2">
         {hasSave && (
           <button
             onClick={onContinue}
-            className="w-full py-3 rounded-xl bg-accent text-ink font-medium"
+            className="w-full py-3 rounded-xl bg-accent text-ink font-medium min-h-[48px]"
           >
             Tiếp tục
           </button>
         )}
-        <button onClick={handleNew} className="w-full py-3 rounded-xl bg-line">
+        <button onClick={handleNew} className="w-full py-3 rounded-xl bg-line min-h-[48px]">
           Bắt đầu mới
         </button>
         <button
           onClick={() => setScreen("howto")}
-          className="w-full py-3 rounded-xl text-soft border border-line"
+          className="w-full py-3 rounded-xl text-soft border border-line min-h-[48px]"
         >
           Cách chơi
         </button>
         <button
           onClick={() => setScreen("settings")}
-          className="w-full py-2 rounded-xl text-soft text-sm"
+          className="w-full py-2 rounded-xl text-soft text-sm min-h-[44px]"
         >
           Cài đặt
         </button>

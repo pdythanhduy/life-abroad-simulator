@@ -3,8 +3,14 @@
 @tailwind utilities;
 
 html,
-body,
+body {
+  height: 100%;
+  overscroll-behavior: none;
+}
+
 #root {
+  min-height: 100%;
+  min-height: 100dvh;
   height: 100%;
 }
 
@@ -13,6 +19,15 @@ body {
   color: #e6e9ef;
   -webkit-font-smoothing: antialiased;
   font-family: Inter, "Noto Sans JP", system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+/* Mobile safe-area helpers (iOS home indicator, Android nav bar). */
+.pb-safe {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom));
+}
+.pb-safe-lg {
+  padding-bottom: max(2.5rem, env(safe-area-inset-bottom));
 }
 
 @keyframes fadeUp {

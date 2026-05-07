@@ -55,8 +55,8 @@ export default function MessageBubble({
         <div
           className={
             isSystem
-              ? "text-xs text-soft italic px-3 py-2"
-              : `border rounded-2xl rounded-tl-sm px-3 py-2 text-[14px] leading-relaxed ${
+              ? "text-xs text-soft italic px-3 py-2 break-words [overflow-wrap:anywhere]"
+              : `border rounded-2xl rounded-tl-sm px-3 py-2 text-[14px] leading-relaxed break-words [overflow-wrap:anywhere] ${
                   COLOR[event.sender] ?? "bg-line border-line"
                 }`
           }

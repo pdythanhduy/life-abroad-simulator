@@ -9,13 +9,17 @@ export default function HistoryScreen({
 }) {
   return (
     <div className="flex flex-col h-full">
-      <div className="flex items-center px-3 py-2 border-b border-line bg-panel/70">
-        <button onClick={onBack} className="text-soft text-sm" aria-label="Back">
+      <div className="flex items-center px-2 border-b border-line bg-panel/70">
+        <button
+          onClick={onBack}
+          className="text-soft text-sm min-h-[44px] min-w-[44px] flex items-center justify-center"
+          aria-label="Back"
+        >
           ←
         </button>
-        <div className="ml-3 text-sm">Nhật ký</div>
+        <div className="ml-1 text-sm">Nhật ký</div>
       </div>
-      <div className="flex-1 overflow-y-auto px-3 py-3 space-y-2 scrollbar-thin">
+      <div className="flex-1 overflow-y-auto px-3 pt-3 pb-safe space-y-2 scrollbar-thin">
         {state.history.length === 0 && (
           <div className="text-soft text-sm">Chưa có gì xảy ra.</div>
         )}
@@ -24,8 +28,8 @@ export default function HistoryScreen({
             <div className="text-[11px] text-soft">
               Day {h.day} · {h.senderName}
             </div>
-            <div className="text-sm mt-1">{h.message}</div>
-            <div className="text-[12px] text-accent mt-1">→ {h.choiceText}</div>
+            <div className="text-sm mt-1 break-words [overflow-wrap:anywhere]">{h.message}</div>
+            <div className="text-[12px] text-accent mt-1 break-words [overflow-wrap:anywhere]">→ {h.choiceText}</div>
           </div>
         ))}
       </div>

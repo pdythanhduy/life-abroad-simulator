@@ -26,10 +26,10 @@ export default function EndingScreen({
           {Math.round(state.stats.relationship)}
         </div>
       </div>
-      <div className="px-6 pb-10">
+      <div className="px-6 pb-safe-lg pt-4">
         <button
           onClick={onRestart}
-          className="w-full py-3 rounded-xl bg-accent text-ink font-medium"
+          className="w-full py-3 rounded-xl bg-accent text-ink font-medium min-h-[48px]"
         >
           Chơi lại
         </button>

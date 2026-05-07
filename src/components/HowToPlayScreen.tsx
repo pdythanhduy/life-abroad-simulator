@@ -17,12 +17,16 @@ export default function HowToPlayScreen({
 }) {
   return (
     <div className="flex flex-col h-full">
-      <div className="flex items-center justify-between px-3 py-2 border-b border-line bg-panel/70">
-        <button onClick={onBack} className="text-soft text-sm w-8 text-left" aria-label="Back">
+      <div className="flex items-center justify-between px-2 border-b border-line bg-panel/70">
+        <button
+          onClick={onBack}
+          className="text-soft text-sm min-h-[44px] min-w-[44px] flex items-center justify-center"
+          aria-label="Back"
+        >
           ←
         </button>
         <div className="text-sm">Cách chơi</div>
-        <div className="w-8" />
+        <div className="min-w-[44px]" />
       </div>
 
       <div className="flex-1 overflow-y-auto px-5 py-5 scrollbar-thin space-y-6">
@@ -105,16 +109,16 @@ export default function HowToPlayScreen({
         </section>
       </div>
 
-      <div className="px-4 pb-5 pt-3 border-t border-line bg-panel/70 flex gap-2">
+      <div className="px-4 pt-3 pb-safe border-t border-line bg-panel/70 flex gap-2">
         <button
           onClick={onBack}
-          className="flex-1 py-3 rounded-xl border border-line text-soft"
+          className="flex-1 py-3 rounded-xl border border-line text-soft min-h-[48px]"
         >
           ← Home
         </button>
         <button
           onClick={onContinue}
-          className="flex-[2] py-3 rounded-xl bg-accent text-ink font-medium"
+          className="flex-[2] py-3 rounded-xl bg-accent text-ink font-medium min-h-[48px]"
         >
           Chọn độ khó →
         </button>
