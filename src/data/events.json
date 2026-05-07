@@ -377,6 +377,25 @@
     ]
   },
   {
+    "id": "EV35_LOST_STRANGER",
+    "day": 4,
+    "type": "system",
+    "sender": "system",
+    "senderName": "Shinjuku · 23:10",
+    "background": "rainy_street",
+    "messages": [
+      "Bạn lạc. Đường không khớp với Google Map.",
+      "Bạn cúi đầu hỏi 1 ông salaryman: 'すみません、新大久保駅は…'",
+      "Ông gật đầu xã giao, đi tiếp. Không trả lời.",
+      "2 người tiếp theo: 1 đeo tai nghe, 1 cười nhẹ rồi đi."
+    ],
+    "choices": [
+      { "id": "A", "text": "Mở Google Map, tự đi.", "statEffects": { "energy": -3, "language": 1 } },
+      { "id": "B", "text": "Vào konbini gần nhất, hỏi nhân viên.", "statEffects": { "language": 3, "stress": -2 } },
+      { "id": "C", "text": "Đứng yên một phút. Hít thở.", "statEffects": { "stress": -3 } }
+    ]
+  },
+  {
     "id": "EV20_LANGUAGE_FAIL",
     "day": 4,
     "type": "system",
@@ -427,6 +446,25 @@
       { "id": "A", "text": "Em chăm mẹ giúp anh, anh gửi tiền về", "statEffects": { "money": -15, "stress": -2, "relationship": 5 }, "setFlags": ["mom_d5_money"] },
       { "id": "B", "text": "Để anh book vé, cuối tuần về", "statEffects": { "money": -25, "stress": 8, "relationship": 6 }, "setFlags": ["mom_d5_visit"], "delayedConsequences": [{ "delayDays": 2, "eventId": "EV34_THINK_GO_HOME" }] },
       { "id": "C", "text": "Nói chuyện video, gắng cười với mẹ", "statEffects": { "stress": 3, "relationship": 4 }, "setFlags": ["mom_d5_video"] }
+    ]
+  },
+  {
+    "id": "EV36_BANK_FORM_FAIL",
+    "day": 5,
+    "type": "system",
+    "sender": "system",
+    "senderName": "Bank · Quầy giao dịch",
+    "background": "cityhall",
+    "messages": [
+      "Bạn ngồi ở quầy bank 30 phút để mở account nhận lương.",
+      "Nhân viên trẻ chỉ vào ô tên trên form: 「漢字、書き直してください。」 — 'Vui lòng viết lại tên kanji cho đúng.'",
+      "Bạn không có hanko. Cô ấy chỉ tay sang konbini cạnh đó: 'Hộp 500 yên.'",
+      "Phía sau bạn đã có thêm 3 người xếp hàng."
+    ],
+    "choices": [
+      { "id": "A", "text": "Đi mua hanko, quay lại làm nốt.", "statEffects": { "money": -5, "energy": -5, "stress": 3, "language": 2 } },
+      { "id": "B", "text": "Cố giải thích bằng tiếng Nhật + Google Translate.", "statEffects": { "language": 4, "stress": 4 } },
+      { "id": "C", "text": "Hẹn lại cuối tuần, cúi đầu xin lỗi.", "statEffects": { "stress": 5, "relationship": 1 } }
     ]
   },
   {
@@ -610,7 +648,7 @@
     "background": "station_night",
     "messages": [
       "Bạn ngồi ở bậc thềm ga Shin-Okubo. Tàu cuối vừa chạy.",
-      "Một tuần trước bạn còn ở nhà. Bây giờ bạn không biết 'nhà' là từ chỉ chỗ nào.",
+      "Một tuần trước bạn còn ở nhà. Bây giờ bạn ngồi đây, không ai biết bạn đang ngồi đây.",
       "Bạn tự hỏi: tuần sau, có lý do nào để dậy không?"
     ],
     "choices": [
