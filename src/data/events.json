@@ -1,0 +1,960 @@
+[
+  {
+    "id": "EV01_ARRIVE",
+    "day": 1,
+    "type": "system",
+    "sender": "system",
+    "senderName": "Tokyo, 23:47",
+    "background": "tiny_room",
+    "messages": [
+      "Bạn đã đến căn phòng 4 chiếu rưỡi của mình.",
+      "Vali còn nguyên. Mùi tatami mới. Ngoài cửa sổ chỉ có biển hiệu konbini sáng xanh.",
+      "Đây là đêm đầu tiên ở Nhật."
+    ],
+    "choices": [
+      { "id": "A", "text": "Mở vali, dọn cho ngăn nắp", "statEffects": { "energy": -8, "stress": -5 } },
+      { "id": "B", "text": "Nằm xuống, nhắm mắt là ngủ", "statEffects": { "energy": 5, "stress": -2 } },
+      { "id": "C", "text": "Ra konbini mua mì", "statEffects": { "energy": -4, "money": -3, "language": 2 } }
+    ]
+  },
+  {
+    "id": "EV02_MOM_FIRST",
+    "day": 1,
+    "type": "chat",
+    "sender": "mom",
+    "senderName": "Mẹ",
+    "background": "tiny_room",
+    "messages": [
+      "Đến nơi rồi à con?",
+      "Ăn gì chưa? Bên đó lạnh không?",
+      "Mẹ nấu canh chua, đăng lên facebook cho con xem."
+    ],
+    "choices": [
+      { "id": "A", "text": "Con ổn mà mẹ. Đừng lo.", "statEffects": { "stress": 4, "relationship": 2 }, "setFlags": ["m_d1_hid"], "tags": ["hide_emotion"] },
+      { "id": "B", "text": "Phòng nhỏ lắm mẹ. Nhưng sạch.", "statEffects": { "stress": -2, "relationship": 4 }, "setFlags": ["m_d1_open"] },
+      { "id": "C", "text": "Mẹ ngủ sớm đi, con đi ngủ đây.", "statEffects": { "energy": 3, "relationship": -1 } }
+    ]
+  },
+  {
+    "id": "EV03_NEIGHBOR_KNOCK",
+    "day": 1,
+    "type": "system",
+    "sender": "neighbor",
+    "senderName": "Bà Sato (hàng xóm)",
+    "background": "tiny_room",
+    "messages": [
+      "Có tiếng gõ cửa rất nhẹ. Hai tiếng. Rồi im.",
+      "Bà cụ ở phòng bên cạnh đứng đó, đưa cho bạn một hộp cơm nắm.",
+      "「これ、よかったら。」 — 'Cái này, nếu bạn không chê.'"
+    ],
+    "choices": [
+      { "id": "A", "text": "Cúi đầu cảm ơn thật sâu", "statEffects": { "relationship": 6, "language": 1 }, "setFlags": ["sato_d1_warm"] },
+      { "id": "B", "text": "「ありがとうございます！」cười tươi", "statEffects": { "relationship": 4, "language": 3, "energy": -1 }, "setFlags": ["sato_d1_warm"] },
+      { "id": "C", "text": "Lúng túng, chỉ gật đầu rồi đóng cửa", "statEffects": { "relationship": -2, "stress": 3 }, "setFlags": ["sato_d1_cold"] }
+    ]
+  },
+  {
+    "id": "EV04_LINH_WELCOME",
+    "day": 1,
+    "type": "chat",
+    "sender": "friend",
+    "senderName": "Linh (bạn cùng quê)",
+    "background": "tiny_room",
+    "messages": [
+      "Ê đến chưa? Kịp tàu cuối không?",
+      "Mai rảnh không, t dắt đi đăng ký my number, không biết là toang đó.",
+      "Mà đừng có nói là mệt nha, mệt cũng phải đi 😤"
+    ],
+    "choices": [
+      { "id": "A", "text": "Mai đi luôn, cảm ơn m nha", "statEffects": { "energy": -10, "language": 5, "relationship": 5 }, "setFlags": ["linh_d1_yes"], "delayedConsequences": [{ "delayDays": 2, "eventId": "EV31_PAPERWORK_DONE" }] },
+      { "id": "B", "text": "Cho t nghỉ một bữa, mốt đi nha", "statEffects": { "energy": 5, "stress": 3 }, "delayedConsequences": [{ "delayDays": 3, "eventId": "EV32_PAPERWORK_LATE" }] },
+      { "id": "C", "text": "T tự đi được", "statEffects": { "stress": 5, "language": 2, "relationship": -3 }, "setFlags": ["linh_d1_solo"] }
+    ]
+  },
+  {
+    "id": "EV05_FIRST_NIGHT",
+    "day": 1,
+    "type": "system",
+    "sender": "self",
+    "senderName": "—",
+    "background": "tiny_room",
+    "messages": [
+      "1:42 AM.",
+      "Trần nhà thấp hơn bạn nghĩ. Tiếng tàu cuối ngày chạy qua.",
+      "Lần đầu trong đời bạn ngủ một mình ở một đất nước không gọi tên bạn đúng."
+    ],
+    "choices": [
+      { "id": "A", "text": "Nhắm mắt. Mai tính.", "statEffects": { "energy": 8, "stress": -3 } },
+      { "id": "B", "text": "Lướt điện thoại 1 tiếng nữa", "statEffects": { "energy": -5, "stress": 4 } },
+      { "id": "C", "text": "Viết một dòng vào note 'mình ổn'", "statEffects": { "stress": -5, "relationship": 1 } }
+    ]
+  },
+  {
+    "id": "EV06_MORNING_TIRED",
+    "day": 2,
+    "type": "system",
+    "sender": "self",
+    "senderName": "Sáng",
+    "background": "tiny_room",
+    "messages": [
+      "Chuông báo thức kêu lần 4.",
+      "Cơ thể nặng, không khí lạ. Bạn vẫn còn ở đây thật."
+    ],
+    "choices": [
+      { "id": "A", "text": "Dậy luôn, rửa mặt, ra ngoài", "statEffects": { "energy": -3, "stress": -3, "language": 1 } },
+      { "id": "B", "text": "Nằm thêm 30 phút", "statEffects": { "energy": 4, "stress": 3 } },
+      { "id": "C", "text": "Pha cà phê đắng, tự nói chuyện", "statEffects": { "energy": 2, "stress": -1 } }
+    ]
+  },
+  {
+    "id": "EV07_MANAGER_FIRST",
+    "day": 2,
+    "type": "chat",
+    "sender": "manager",
+    "senderName": "Tenchou (Quản lý)",
+    "background": "konbini",
+    "messages": [
+      "「明日19時から、よろしく。」 — 'Mai 19h, làm nha.'",
+      "「日本語、大丈夫？」 — 'Tiếng Nhật ổn chứ?'"
+    ],
+    "choices": [
+      { "id": "A", "text": "「はい、大丈夫です！」", "statEffects": { "stress": 5, "language": 2, "money": 3 }, "setFlags": ["mgr_d2_pretend"] },
+      { "id": "B", "text": "「少しだけ、頑張ります。」", "statEffects": { "stress": -1, "language": 3, "relationship": 2 }, "setFlags": ["mgr_d2_humble"] },
+      { "id": "C", "text": "Im lặng vài giây rồi gật", "statEffects": { "stress": 7, "relationship": -2 }, "setFlags": ["mgr_d2_silent"] }
+    ]
+  },
+  {
+    "id": "EV08_CITYHALL_MAIL",
+    "day": 2,
+    "type": "mail",
+    "sender": "cityhall",
+    "senderName": "Shibuya City Hall",
+    "background": "cityhall",
+    "messages": [
+      "[Thư từ thành phố] Bạn cần đăng ký cư trú trong vòng 14 ngày.",
+      "Phí phạt nếu trễ: ~10,000 yên.",
+      "Văn bản dày, toàn kanji."
+    ],
+    "choices": [
+      { "id": "A", "text": "Hôm nay đi luôn, cùng Linh", "statEffects": { "energy": -10, "language": 4 } },
+      { "id": "B", "text": "Để cuối tuần", "statEffects": { "stress": 2 }, "delayedConsequences": [{ "delayDays": 3, "eventId": "EV33_FINE_LATE" }] },
+      { "id": "C", "text": "Đóng thư, giả vờ không thấy", "statEffects": { "stress": 4 }, "delayedConsequences": [{ "delayDays": 4, "eventId": "EV33_FINE_LATE" }] }
+    ]
+  },
+  {
+    "id": "EV09_EX_TEXT",
+    "day": 2,
+    "type": "chat",
+    "sender": "ex",
+    "senderName": "Hà",
+    "background": "tiny_room",
+    "messages": [
+      "Đến nơi an toàn không?",
+      "T thấy story, phòng nhỏ ghê 😅",
+      "… không có gì, hỏi vậy thôi."
+    ],
+    "choices": [
+      { "id": "A", "text": "Ừ. Bên này ổn.", "statEffects": { "stress": 3, "relationship": -1 } },
+      { "id": "B", "text": "Sao tự nhiên hỏi vậy?", "statEffects": { "stress": 6, "relationship": -3 }, "setFlags": ["ex_d2_harsh"] },
+      { "id": "C", "text": "Cảm ơn. Bảo trọng nhé.", "statEffects": { "stress": -2, "relationship": 1 }, "setFlags": ["ex_d2_kind"] }
+    ]
+  },
+  {
+    "id": "EV10_KONBINI_FIRST",
+    "day": 2,
+    "type": "system",
+    "sender": "system",
+    "senderName": "Konbini · ca tối đầu tiên",
+    "background": "konbini",
+    "messages": [
+      "Đèn trắng lạnh. Mùi oden. Nhạc 'irasshaimase' lặp đi lặp lại.",
+      "Một bà khách đưa thẻ point và nói gì đó rất nhanh."
+    ],
+    "choices": [
+      { "id": "A", "text": "Hỏi lại: 'すみません、もう一度…'", "statEffects": { "language": 5, "stress": -2 } },
+      { "id": "B", "text": "Đoán đại, bấm bừa nút", "statEffects": { "stress": 7, "money": -2, "language": 1 } },
+      { "id": "C", "text": "Gọi đồng nghiệp giúp", "statEffects": { "language": 2, "relationship": 3 } }
+    ]
+  },
+  {
+    "id": "EV11_KENTA_HELLO",
+    "day": 3,
+    "type": "chat",
+    "sender": "colleague",
+    "senderName": "Kenta (đồng nghiệp)",
+    "background": "konbini",
+    "messages": [
+      "「お疲れさま。」",
+      "「昨日、ちょっと忙しかったね。大丈夫？」 — 'Hôm qua hơi đông nhỉ, ổn chứ?'"
+    ],
+    "choices": [
+      { "id": "A", "text": "「大丈夫です、ありがとう。」", "statEffects": { "language": 3, "relationship": 3 } },
+      { "id": "B", "text": "「正直、難しかったです。」 — thật ra hôm qua khó", "statEffects": { "language": 4, "relationship": 5, "stress": -3 }, "setFlags": ["kenta_d3_open"] },
+      { "id": "C", "text": "Cười xã giao, đổi chủ đề", "statEffects": { "stress": 2, "relationship": -1 }, "setFlags": ["kenta_d3_polite"] }
+    ]
+  },
+  {
+    "id": "EV12_MOM_VIDEO",
+    "day": 3,
+    "type": "chat",
+    "sender": "mom",
+    "senderName": "Mẹ · video call",
+    "background": "tiny_room",
+    "messages": [
+      "Mẹ thấy con hốc mắt thâm rồi đó.",
+      "Có ăn được không? Để mẹ gửi ruốc với mì sang.",
+      "Đừng giấu mẹ. Mẹ đẻ ra con, mẹ biết."
+    ],
+    "choices": [
+      { "id": "A", "text": "Con ổn mà mẹ, làm thêm tí thôi", "statEffects": { "stress": 6, "relationship": 1 }, "setFlags": ["m_d3_hid"], "tags": ["hide_emotion"] },
+      { "id": "B", "text": "Hơi mệt mẹ ạ. Nhưng con xoay được.", "statEffects": { "stress": -4, "relationship": 5, "energy": 2 }, "setFlags": ["m_d3_open"] },
+      { "id": "C", "text": "Khóc. Không nói gì.", "statEffects": { "stress": -7, "relationship": 7, "energy": -3 }, "setFlags": ["m_d3_cried"] }
+    ]
+  },
+  {
+    "id": "EV13_RENT_DUE",
+    "day": 3,
+    "type": "notification",
+    "sender": "bank",
+    "senderName": "Bank · Thông báo",
+    "background": "tiny_room",
+    "messages": [
+      "Tiền thuê tháng này: 55,000 yên — sẽ tự trừ vào ngày 27.",
+      "Số dư hiện tại đủ. Tạm thời."
+    ],
+    "choices": [
+      { "id": "A", "text": "Ghi nhớ. Tiết kiệm thêm.", "statEffects": { "stress": 2 } },
+      { "id": "B", "text": "Đặt báo lịch nhắc lại 2 ngày trước", "statEffects": { "stress": -3 } },
+      { "id": "C", "text": "Không quan tâm bây giờ", "statEffects": { "stress": 4 } }
+    ]
+  },
+  {
+    "id": "EV14_INSURANCE",
+    "day": 3,
+    "type": "mail",
+    "sender": "cityhall",
+    "senderName": "Bảo hiểm y tế quốc dân",
+    "background": "cityhall",
+    "messages": [
+      "Hóa đơn 3 tháng đầu: 18,400 yên.",
+      "Có thể trả góp tại convenience store hoặc city hall.",
+      "Nếu không đóng, ốm đau tự lo."
+    ],
+    "choices": [
+      { "id": "A", "text": "Đi đóng ngay tại konbini sau ca", "statEffects": { "money": -18, "stress": -3, "language": 2 } },
+      { "id": "B", "text": "Chia nhỏ trả tháng sau", "statEffects": { "money": -6, "stress": 2 } },
+      { "id": "C", "text": "Bỏ qua, lo sau", "statEffects": { "stress": 5 }, "delayedConsequences": [{ "delayDays": 3, "eventId": "EV33_FINE_LATE" }] }
+    ]
+  },
+  {
+    "id": "EV15_FRIEND_BUSY",
+    "day": 3,
+    "type": "chat",
+    "sender": "friend",
+    "senderName": "Linh",
+    "background": "rainy_street",
+    "messages": [
+      "Ê tối nay không đi được nữa, sếp t đổi ca.",
+      "Sorry sorry, tuần sau bù nha 🙏",
+      "Chắc mày tự ăn nha."
+    ],
+    "choices": [
+      { "id": "A", "text": "OK. Tuần sau thật đó nha.", "statEffects": { "stress": 3, "relationship": -1 } },
+      { "id": "B", "text": "Không sao, m cố lên.", "statEffects": { "stress": -1, "relationship": 2 }, "setFlags": ["linh_d3_kind"] },
+      { "id": "C", "text": "Im lặng. Không trả lời.", "statEffects": { "stress": 6, "relationship": -5 }, "setFlags": ["linh_d3_iced"] }
+    ],
+    "variants": [
+      {
+        "requireFlags": ["linh_d1_yes"],
+        "messages": [
+          "Ê tối nay t không qua được rồi, sếp đổi ca đột xuất.",
+          "Mà nói thật nha, hôm m để t dắt đi city hall, t mới hiểu m sang bị shock cỡ nào.",
+          "T xin lỗi t bận. Tuần sau t bù gấp đôi, không hủy nữa."
+        ],
+        "choices": [
+          { "id": "A", "text": "OK. Tuần sau t chờ.", "statEffects": { "relationship": 3 } },
+          { "id": "B", "text": "Không sao, m cố lên.", "statEffects": { "stress": -2, "relationship": 4 }, "setFlags": ["linh_d3_kind"] },
+          { "id": "C", "text": "Im lặng đọc, không trả lời.", "statEffects": { "stress": 4, "relationship": -3 }, "setFlags": ["linh_d3_iced"] }
+        ]
+      },
+      {
+        "requireFlags": ["linh_d1_solo"],
+        "messages": [
+          "Ê tối nay không đi được, sếp đổi ca.",
+          "Mà m tự đi được mà, ha 😅",
+          "Tuần sau bù — nếu m còn nhớ rủ t."
+        ],
+        "choices": [
+          { "id": "A", "text": "OK. Tuần sau.", "statEffects": { "relationship": -1 } },
+          { "id": "B", "text": "Cảm ơn m vẫn nhắn.", "statEffects": { "stress": -1, "relationship": 3 }, "setFlags": ["linh_d3_kind"] },
+          { "id": "C", "text": "Im lặng, không trả lời.", "statEffects": { "stress": 5, "relationship": -6 }, "setFlags": ["linh_d3_iced"] }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "EV16_2AM",
+    "day": 4,
+    "type": "notification",
+    "sender": "system",
+    "senderName": "02:14 AM",
+    "background": "tiny_room",
+    "messages": [
+      "Bạn không ngủ được. Trần nhà vẫn thấp.",
+      "Điện thoại có 0 tin nhắn mới."
+    ],
+    "choices": [
+      { "id": "A", "text": "Mở Google Map, đi bộ ra ga", "statEffects": { "energy": -6, "stress": -6 } },
+      { "id": "B", "text": "Lướt mạng xã hội VN", "statEffects": { "energy": -4, "stress": 4, "relationship": -1 } },
+      { "id": "C", "text": "Tắt máy, đếm đến 1000", "statEffects": { "energy": 5, "stress": -2 } }
+    ]
+  },
+  {
+    "id": "EV17_MANAGER_SHIFT",
+    "day": 4,
+    "type": "chat",
+    "sender": "manager",
+    "senderName": "Tenchou",
+    "background": "konbini",
+    "messages": [
+      "「明日のシフト、深夜に変更でいい？」 — 'Mai đổi sang ca đêm được không?'",
+      "「人が足りなくて。」 — 'Thiếu người.'"
+    ],
+    "choices": [
+      { "id": "A", "text": "「はい、できます。」", "statEffects": { "money": 8, "energy": -10, "stress": 7, "relationship": 3 }, "setFlags": ["mgr_d4_yes"] },
+      { "id": "B", "text": "「すみません、明日は無理です。」", "statEffects": { "stress": -3, "language": 3, "relationship": -3 }, "setFlags": ["mgr_d4_no"] },
+      { "id": "C", "text": "「半分だけならできます。」 — 'Nửa ca thì được.'", "statEffects": { "money": 4, "energy": -5, "stress": 2, "relationship": 4, "language": 4 }, "setFlags": ["mgr_d4_half"] }
+    ]
+  },
+  {
+    "id": "EV18_NEIGHBOR_TEA",
+    "day": 4,
+    "type": "system",
+    "sender": "neighbor",
+    "senderName": "Bà Sato",
+    "background": "tiny_room",
+    "messages": [
+      "Bà Sato gõ cửa, lần này có ấm trà.",
+      "「一緒に、少しだけ。」 — 'Uống cùng tôi chút thôi.'",
+      "Bà không hỏi gì. Chỉ ngồi đó. Trà nóng."
+    ],
+    "choices": [
+      { "id": "A", "text": "Ngồi 30 phút, không cần nói gì", "statEffects": { "stress": -10, "relationship": 6, "energy": 3 }, "setFlags": ["sato_d4_tea"] },
+      { "id": "B", "text": "Cố nói tiếng Nhật vài câu", "statEffects": { "stress": -4, "language": 5, "relationship": 4 }, "setFlags": ["sato_d4_tea"] },
+      { "id": "C", "text": "Xin phép vì đang bận", "statEffects": { "stress": 4, "relationship": -3 }, "setFlags": ["sato_d4_no"] }
+    ],
+    "variants": [
+      {
+        "requireFlags": ["sato_d1_cold"],
+        "messages": [
+          "Bà Sato lại gõ cửa. Lần này có ấm trà.",
+          "Bà không nhắc gì hôm trước bạn đóng cửa nhanh.",
+          "「一緒に、少しだけ。」 — chỉ vậy thôi."
+        ],
+        "choices": [
+          { "id": "A", "text": "Ngồi xuống. Cúi đầu xin lỗi hôm trước.", "statEffects": { "stress": -8, "relationship": 8, "language": 2 }, "setFlags": ["sato_d4_tea"] },
+          { "id": "B", "text": "Cố nói tiếng Nhật vài câu", "statEffects": { "stress": -4, "language": 5, "relationship": 5 }, "setFlags": ["sato_d4_tea"] },
+          { "id": "C", "text": "Lại xin phép vì bận", "statEffects": { "stress": 6, "relationship": -5 }, "setFlags": ["sato_d4_no"] }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "EV19_RUDE_CUSTOMER",
+    "day": 4,
+    "type": "system",
+    "sender": "system",
+    "senderName": "Konbini · 22:30",
+    "background": "konbini",
+    "messages": [
+      "Một ông khách say cằn nhằn tiền thừa.",
+      "「日本語、ちゃんとして。」 — 'Nói tiếng Nhật cho đàng hoàng đi.'"
+    ],
+    "choices": [
+      { "id": "A", "text": "Cúi đầu, xin lỗi đúng quy trình", "statEffects": { "stress": 6, "relationship": 1, "language": 1 }, "setFlags": ["cust_d4_swallow"] },
+      { "id": "B", "text": "Bình tĩnh giải thích lại bằng tiếng Nhật", "statEffects": { "language": 5, "stress": 3 }, "setFlags": ["cust_d4_stood"] },
+      { "id": "C", "text": "Gọi tenchou ra xử lý", "statEffects": { "stress": -2, "relationship": -1 }, "setFlags": ["cust_d4_escal"] }
+    ]
+  },
+  {
+    "id": "EV20_LANGUAGE_FAIL",
+    "day": 4,
+    "type": "system",
+    "sender": "self",
+    "senderName": "Sau ca làm",
+    "background": "rainy_street",
+    "messages": [
+      "Mưa nhỏ. Bạn đi bộ về, đầu vẫn còn quay quay vì câu mắng lúc nãy.",
+      "Bạn nhận ra: ở đây giỏi tiếng không phải để hay — là để không bị thương."
+    ],
+    "choices": [
+      { "id": "A", "text": "Tối nay học 30 từ mới", "statEffects": { "energy": -5, "language": 6, "stress": -2 } },
+      { "id": "B", "text": "Tắt não, ăn mì, ngủ", "statEffects": { "energy": 5, "stress": -4 } },
+      { "id": "C", "text": "Gọi cho mẹ, không nói chuyện đó", "statEffects": { "stress": -3, "relationship": 3 } }
+    ]
+  },
+  {
+    "id": "EV21_TAX_SHOCK",
+    "day": 5,
+    "type": "mail",
+    "sender": "cityhall",
+    "senderName": "Sở thuế",
+    "background": "cityhall",
+    "messages": [
+      "[Thông báo] Thuế cư trú năm đầu được tính sau 1 năm — không phải bây giờ.",
+      "Nhưng phải đăng ký ngay để được tính đúng. Form A4, 3 trang, kanji.",
+      "Bạn nhìn như nhìn vào một bức tường."
+    ],
+    "choices": [
+      { "id": "A", "text": "Hỏi Linh giúp dịch tối nay", "statEffects": { "energy": -3, "language": 3, "relationship": 2 } },
+      { "id": "B", "text": "Lên forum người Việt tìm bài cũ", "statEffects": { "energy": -2, "language": 2, "stress": -1 } },
+      { "id": "C", "text": "Ghim lên tường, để mai", "statEffects": { "stress": 4 }, "delayedConsequences": [{ "delayDays": 2, "eventId": "EV33_FINE_LATE" }] }
+    ]
+  },
+  {
+    "id": "EV22_MOM_SICK",
+    "day": 5,
+    "type": "chat",
+    "sender": "mom",
+    "senderName": "Em gái",
+    "background": "tiny_room",
+    "messages": [
+      "Anh ơi mẹ sốt nhẹ, em đưa đi khám rồi.",
+      "Mẹ không cho báo anh đâu, em báo lén. Anh đừng nói lại.",
+      "Mẹ cứ hỏi anh ăn gì, ngủ được không."
+    ],
+    "choices": [
+      { "id": "A", "text": "Em chăm mẹ giúp anh, anh gửi tiền về", "statEffects": { "money": -15, "stress": -2, "relationship": 5 }, "setFlags": ["mom_d5_money"] },
+      { "id": "B", "text": "Để anh book vé, cuối tuần về", "statEffects": { "money": -25, "stress": 8, "relationship": 6 }, "setFlags": ["mom_d5_visit"], "delayedConsequences": [{ "delayDays": 2, "eventId": "EV34_THINK_GO_HOME" }] },
+      { "id": "C", "text": "Nói chuyện video, gắng cười với mẹ", "statEffects": { "stress": 3, "relationship": 4 }, "setFlags": ["mom_d5_video"] }
+    ]
+  },
+  {
+    "id": "EV23_KENTA_INVITE",
+    "day": 5,
+    "type": "chat",
+    "sender": "colleague",
+    "senderName": "Kenta",
+    "background": "office",
+    "messages": [
+      "「今日、飲みに行く？」 — 'Tối nay đi nhậu không?'",
+      "「軽く一杯だけ。」 — 'Chỉ một ly nhẹ thôi.'"
+    ],
+    "choices": [
+      { "id": "A", "text": "Đi! 「行きます！」", "statEffects": { "money": -15, "energy": -8, "stress": -8, "language": 5, "relationship": 7 }, "setFlags": ["kenta_d5_drank"] },
+      { "id": "B", "text": "「次回、絶対。」 — lần sau chắc chắn", "statEffects": { "relationship": 1, "stress": 2 }, "setFlags": ["kenta_d5_skip"] },
+      { "id": "C", "text": "Đi 30 phút, về sớm", "statEffects": { "money": -8, "energy": -3, "stress": -4, "language": 3, "relationship": 4 }, "setFlags": ["kenta_d5_brief"] }
+    ],
+    "variants": [
+      {
+        "requireFlags": ["cust_d4_stood"],
+        "messages": [
+          "「お疲れ。今日、飲みに行く？」",
+          "「昨日、あの酔っ払いに日本語で言い返してたの、見たよ。かっこよかった。」 — 'Hôm qua thấy mày cãi lại ông khách say bằng tiếng Nhật. Cool đó.'",
+          "「一杯だけでも、行こう。」"
+        ],
+        "choices": [
+          { "id": "A", "text": "Đi! Cảm ơn m thấy.", "statEffects": { "money": -15, "energy": -8, "stress": -10, "language": 5, "relationship": 9 }, "setFlags": ["kenta_d5_drank"] },
+          { "id": "B", "text": "「次回、絶対。」", "statEffects": { "relationship": 2, "stress": 1 }, "setFlags": ["kenta_d5_skip"] },
+          { "id": "C", "text": "Đi 30 phút thôi", "statEffects": { "money": -8, "energy": -3, "stress": -5, "language": 3, "relationship": 6 }, "setFlags": ["kenta_d5_brief"] }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "EV24_LOW_BALANCE",
+    "day": 5,
+    "type": "notification",
+    "sender": "bank",
+    "senderName": "Bank · Cảnh báo",
+    "background": "tiny_room",
+    "messages": [
+      "Số dư < 30,000 yên.",
+      "Hơn nửa tháng nữa mới có lương."
+    ],
+    "choices": [
+      { "id": "A", "text": "Ăn cơm trắng + tamago 3 ngày tới", "statEffects": { "money": 6, "energy": -5, "stress": 3 } },
+      { "id": "B", "text": "Xin tenchou ứng trước 1 tuần", "statEffects": { "money": 15, "stress": 6, "relationship": -2 } },
+      { "id": "C", "text": "Hỏi mượn Linh", "statEffects": { "money": 12, "relationship": -4, "stress": -2 } }
+    ]
+  },
+  {
+    "id": "EV25_EX_DEEP",
+    "day": 6,
+    "type": "chat",
+    "sender": "ex",
+    "senderName": "Hà",
+    "background": "rainy_street",
+    "messages": [
+      "T biết m chắc đang mệt.",
+      "Hồi đó t hay nói m ích kỷ. Sang đó rồi t mới hiểu, có những lúc người ta phải ích kỷ một chút mới sống được.",
+      "Bảo trọng. Thật."
+    ],
+    "choices": [
+      { "id": "A", "text": "Cảm ơn. M cũng vậy nha.", "statEffects": { "stress": -5, "relationship": 3 } },
+      { "id": "B", "text": "Tự nhiên hôm nay m lạ ghê.", "statEffects": { "stress": 4, "relationship": -2 } },
+      { "id": "C", "text": "Im lặng đọc 3 lần rồi tắt máy", "statEffects": { "stress": -2, "energy": -2 } }
+    ],
+    "variants": [
+      {
+        "requireFlags": ["ex_d2_kind"],
+        "messages": [
+          "T biết m chắc đang mệt.",
+          "Hôm trước m nhắn 'bảo trọng' với t. T đọc cả tuần, mới dám trả lời.",
+          "Hồi đó t hay nói m ích kỷ. Bây giờ t mới hiểu, có những lúc người ta phải ích kỷ một chút mới sống được.",
+          "M không nợ t cái gì. T cũng không. Cứ đi tiếp đi."
+        ],
+        "choices": [
+          { "id": "A", "text": "Cảm ơn. M cũng vậy nha.", "statEffects": { "stress": -7, "relationship": 4 } },
+          { "id": "B", "text": "Cảm ơn vì câu cuối.", "statEffects": { "stress": -5, "relationship": 3 } },
+          { "id": "C", "text": "Im lặng đọc, lưu lại.", "statEffects": { "stress": -3 } }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "EV26_MANAGER_OVERTIME",
+    "day": 6,
+    "type": "chat",
+    "sender": "manager",
+    "senderName": "Tenchou",
+    "background": "konbini",
+    "messages": [
+      "「来週から、もっとシフト入れる？」 — 'Tuần sau tăng giờ luôn nha?'",
+      "「お金、必要でしょう。」 — 'Cần tiền mà, đúng không?'"
+    ],
+    "choices": [
+      { "id": "A", "text": "Nhận full giờ, cày", "statEffects": { "money": 20, "energy": -15, "stress": 12, "relationship": 2 }, "setFlags": ["mgr_d6_max"] },
+      { "id": "B", "text": "Tăng vừa phải", "statEffects": { "money": 10, "energy": -6, "stress": 4 }, "setFlags": ["mgr_d6_some"] },
+      { "id": "C", "text": "Cảm ơn, tuần này con muốn nghỉ ngơi", "statEffects": { "stress": -6, "energy": 6, "relationship": -2, "language": 2 }, "setFlags": ["mgr_d6_rest"] }
+    ],
+    "variants": [
+      {
+        "requireFlags": ["mgr_d4_yes"],
+        "messages": [
+          "「先週、無理させちゃったね。」 — 'Tuần trước bắt cố quá nhỉ.'",
+          "「来週、ちょっとだけ増やす？無理しないで。」 — 'Tuần sau tăng nhẹ thôi nhé. Đừng cố.'"
+        ],
+        "choices": [
+          { "id": "A", "text": "Vẫn nhận full được mà", "statEffects": { "money": 18, "energy": -12, "stress": 8, "relationship": 3 }, "setFlags": ["mgr_d6_max"] },
+          { "id": "B", "text": "「ちょうどいい量で。」 — vừa đủ", "statEffects": { "money": 8, "energy": -3, "stress": 2, "relationship": 5, "language": 2 }, "setFlags": ["mgr_d6_some"] },
+          { "id": "C", "text": "「ありがとう。今週は休みたい。」", "statEffects": { "stress": -8, "energy": 8, "relationship": 2, "language": 3 }, "setFlags": ["mgr_d6_rest"] }
+        ]
+      },
+      {
+        "requireFlags": ["mgr_d4_no"],
+        "messages": [
+          "「先週は断ってくれて、ありがとう。」 — 'Tuần trước cậu từ chối, cảm ơn nhé — tôi mới biết phải sắp xếp lại.'",
+          "「来週から、無理しない範囲で増やせる？」 — 'Tuần sau tăng trong mức không gắng được không?'"
+        ],
+        "choices": [
+          { "id": "A", "text": "Tăng vừa phải", "statEffects": { "money": 10, "energy": -6, "stress": 3, "relationship": 4 }, "setFlags": ["mgr_d6_some"] },
+          { "id": "B", "text": "Tuần này con vẫn cần nghỉ", "statEffects": { "stress": -5, "energy": 6, "relationship": 1, "language": 2 }, "setFlags": ["mgr_d6_rest"] },
+          { "id": "C", "text": "Để con nghĩ thêm, mai trả lời", "statEffects": { "stress": 2, "language": 1 } }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "EV27_NEIGHBOR_GIFT",
+    "day": 6,
+    "type": "system",
+    "sender": "neighbor",
+    "senderName": "Bà Sato",
+    "background": "tiny_room",
+    "messages": [
+      "Sáng ra, trước cửa có một hộp okazu nho nhỏ và một mảnh giấy.",
+      "「無理しないでね。」 — 'Đừng cố quá nhé.'",
+      "Chỉ vậy thôi."
+    ],
+    "choices": [
+      { "id": "A", "text": "Viết thư cảm ơn bằng tiếng Nhật", "statEffects": { "language": 5, "relationship": 6, "stress": -4 }, "setFlags": ["sato_d6_letter"] },
+      { "id": "B", "text": "Gõ cửa, cúi đầu cảm ơn", "statEffects": { "relationship": 5, "language": 1, "stress": -3 } },
+      { "id": "C", "text": "Cất hộp đi, sau cảm ơn sau", "statEffects": { "stress": -1 } }
+    ],
+    "variants": [
+      {
+        "requireFlags": ["sato_d4_tea"],
+        "messages": [
+          "Sáng ra, trước cửa có một hộp okazu và một mảnh giấy gấp đôi.",
+          "「昨夜、私も眠れなかった。冷蔵庫に小豆あんがあるから、自分で取って。」",
+          "— 'Đêm qua tôi cũng không ngủ được. Trong tủ lạnh có chè đậu đỏ. Tự lấy nha.'"
+        ],
+        "choices": [
+          { "id": "A", "text": "Sang ăn chè cùng bà luôn", "statEffects": { "stress": -10, "relationship": 8, "language": 3, "energy": 4 }, "setFlags": ["sato_d6_letter"] },
+          { "id": "B", "text": "Viết thư cảm ơn bằng tiếng Nhật", "statEffects": { "language": 5, "relationship": 6, "stress": -5 }, "setFlags": ["sato_d6_letter"] },
+          { "id": "C", "text": "Cất hộp đi, lúc khác cảm ơn", "statEffects": { "stress": -2, "relationship": -1 } }
+        ]
+      },
+      {
+        "requireFlags": ["sato_d4_no"],
+        "messages": [
+          "Sáng ra, trước cửa có một hộp okazu nho nhỏ.",
+          "Lần này không có giấy. Không có gì cả.",
+          "Bà Sato lại đang quay vào — bạn chỉ thấy bóng lưng."
+        ],
+        "choices": [
+          { "id": "A", "text": "Gọi với theo: 'すみません！'", "statEffects": { "stress": -3, "relationship": 5, "language": 2 } },
+          { "id": "B", "text": "Viết thư cảm ơn, để trước cửa bà", "statEffects": { "language": 5, "relationship": 6, "stress": -4 }, "setFlags": ["sato_d6_letter"] },
+          { "id": "C", "text": "Đem hộp vào, không nói gì", "statEffects": { "stress": 2, "relationship": -2 } }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "EV28_LATE_NIGHT_REFLECT",
+    "day": 6,
+    "type": "system",
+    "sender": "self",
+    "senderName": "Đêm thứ 6",
+    "background": "station_night",
+    "messages": [
+      "Bạn ngồi ở bậc thềm ga Shin-Okubo. Tàu cuối vừa chạy.",
+      "Một tuần trước bạn còn ở nhà. Bây giờ bạn không biết 'nhà' là từ chỉ chỗ nào.",
+      "Bạn tự hỏi: tuần sau, có lý do nào để dậy không?"
+    ],
+    "choices": [
+      { "id": "A", "text": "Có. Để mẹ thấy mình ổn.", "statEffects": { "stress": -3, "relationship": 4, "energy": 2 } },
+      { "id": "B", "text": "Có. Để biết tiếng Nhật khá lên.", "statEffects": { "stress": -2, "language": 4, "energy": 2 } },
+      { "id": "C", "text": "Chưa biết. Nhưng vẫn dậy.", "statEffects": { "stress": -5, "energy": 3 } }
+    ],
+    "variants": [
+      {
+        "requireFlags": ["sato_d4_tea"],
+        "messages": [
+          "Bạn ngồi ở bậc thềm ga Shin-Okubo. Tàu cuối vừa chạy.",
+          "Bạn nhớ ấm trà bà Sato. Cái im lặng dễ chịu đó.",
+          "Một tuần trước bạn không nghĩ một bà cụ Nhật có thể là lý do để bạn không xuống tàu."
+        ],
+        "choices": [
+          { "id": "A", "text": "Có. Để có ai đó để uống trà cùng.", "statEffects": { "stress": -6, "relationship": 5, "energy": 3 } },
+          { "id": "B", "text": "Có. Để mẹ thấy mình ổn.", "statEffects": { "stress": -3, "relationship": 4, "energy": 2 } },
+          { "id": "C", "text": "Chưa biết. Nhưng vẫn dậy.", "statEffects": { "stress": -5, "energy": 3 } }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "EV29_FINAL_MOM",
+    "day": 7,
+    "type": "chat",
+    "sender": "mom",
+    "senderName": "Mẹ",
+    "background": "tiny_room",
+    "messages": [
+      "Một tuần rồi đó con.",
+      "Mẹ không hỏi nữa. Con tự biết con cần gì.",
+      "Chỉ là… nhà lúc nào cũng có cơm cho con, nếu con muốn về."
+    ],
+    "choices": [
+      { "id": "A", "text": "Con ở lại thử thêm. Cảm ơn mẹ.", "statEffects": { "stress": -4, "relationship": 5, "energy": 3 } },
+      { "id": "B", "text": "Con nhớ nhà lắm. Nhưng chưa về được.", "statEffects": { "stress": -2, "relationship": 6, "energy": 1 } },
+      { "id": "C", "text": "Mẹ ơi, con muốn về.", "statEffects": { "stress": -8, "relationship": 8, "money": -10, "energy": -2 } }
+    ],
+    "variants": [
+      {
+        "requireFlags": ["m_d3_cried"],
+        "messages": [
+          "Hôm con khóc qua điện thoại, mẹ biết. Mẹ định gọi lại — nhưng mẹ chờ con tự nói.",
+          "Tuần này con không phải kể với mẹ con đã làm được gì.",
+          "Mẹ chỉ muốn hỏi: tuần này con có muốn ngủ một giấc dài không?"
+        ],
+        "choices": [
+          { "id": "A", "text": "Cảm ơn mẹ. Con chưa về đâu.", "statEffects": { "stress": -8, "relationship": 8, "energy": 4 } },
+          { "id": "B", "text": "Con muốn ngủ một giấc dài. Sau đó con đi tiếp.", "statEffects": { "stress": -10, "relationship": 6, "energy": 6 } },
+          { "id": "C", "text": "Con yêu mẹ.", "statEffects": { "stress": -12, "relationship": 10 } }
+        ]
+      },
+      {
+        "requireFlags": ["mom_d5_visit"],
+        "messages": [
+          "Em nó nói con tính đặt vé về tuần này. Mẹ giận đó.",
+          "Mẹ chỉ sốt nhẹ thôi. Đừng tốn tiền vì mẹ.",
+          "Nếu con về, hãy về vì con — không phải vì mẹ. Hứa với mẹ điều đó."
+        ],
+        "choices": [
+          { "id": "A", "text": "Con hứa. Lần này con ở lại.", "statEffects": { "stress": -5, "relationship": 6, "money": 8, "energy": 2 } },
+          { "id": "B", "text": "Con vẫn về. Nhưng đây là lần cuối con về vì hoảng.", "statEffects": { "stress": -7, "relationship": 7, "money": -15 } },
+          { "id": "C", "text": "Con xin lỗi mẹ.", "statEffects": { "stress": -3, "relationship": 4, "money": 5 } }
+        ]
+      },
+      {
+        "requireFlags": ["mom_d5_money"],
+        "messages": [
+          "Em nó nói con gửi tiền về cho mẹ. Mẹ trả lại đó.",
+          "Mẹ không cần. Con cần. Lo cho mình ăn đủ trước đã.",
+          "Con đi xa không phải để gửi tiền. Là để có một cuộc đời con tự gọi tên."
+        ],
+        "choices": [
+          { "id": "A", "text": "Con cảm ơn mẹ. Con sẽ giữ lại.", "statEffects": { "stress": -6, "relationship": 6, "money": 10, "energy": 2 } },
+          { "id": "B", "text": "Con vẫn muốn gửi nửa thôi.", "statEffects": { "stress": -3, "relationship": 4, "money": -5 } },
+          { "id": "C", "text": "Con hiểu rồi mẹ.", "statEffects": { "stress": -4, "relationship": 5, "money": 6 } }
+        ]
+      },
+      {
+        "requireFlags": ["m_d3_open"],
+        "messages": [
+          "Cảm ơn con đã không nói dối mẹ tuần này.",
+          "Mẹ ngủ ngon hơn khi biết con đang cố — chứ không phải đang ổn.",
+          "Mai con dậy, mẹ vẫn ở đây. Như cái cây trước cửa nhà mình."
+        ],
+        "choices": [
+          { "id": "A", "text": "Con ở lại thử thêm. Cảm ơn mẹ.", "statEffects": { "stress": -5, "relationship": 6, "energy": 3 } },
+          { "id": "B", "text": "Con nhớ nhà lắm. Nhưng chưa về được.", "statEffects": { "stress": -3, "relationship": 7, "energy": 1 } },
+          { "id": "C", "text": "Tuần sau con sẽ kể tiếp với mẹ.", "statEffects": { "stress": -6, "relationship": 7 } }
+        ]
+      },
+      {
+        "requireFlags": ["m_d1_hid", "m_d3_hid"],
+        "messages": [
+          "Mẹ không hỏi nữa. Mẹ biết con không trả lời thật bao giờ.",
+          "Chỉ là — mẹ luôn ở đây. Khi nào con sẵn sàng kể, mẹ sẽ nghe.",
+          "Đừng để mẹ chỉ biết con qua em gái nữa."
+        ],
+        "choices": [
+          { "id": "A", "text": "Con xin lỗi mẹ.", "statEffects": { "stress": -4, "relationship": 5 } },
+          { "id": "B", "text": "Lần sau con kể thật. Con hứa.", "statEffects": { "stress": -3, "relationship": 4 } },
+          { "id": "C", "text": "Con không biết bắt đầu thế nào, mẹ.", "statEffects": { "stress": -5, "relationship": 6 } }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "EV30_DAY7_DECIDE",
+    "day": 7,
+    "type": "system",
+    "sender": "self",
+    "senderName": "Day 7 · cuối ngày",
+    "background": "tiny_room",
+    "messages": [
+      "Đèn phòng vẫn vàng. Bạn tắm xong, ngồi trên futon.",
+      "Tuần đầu tiên của bạn ở Nhật vừa khép lại.",
+      "Bạn nhìn lại 7 ngày — và biết tuần thứ 8 sẽ không giống tuần này."
+    ],
+    "choices": [
+      { "id": "A", "text": "Khép sổ. Ngày mai tính tiếp.", "statEffects": { "energy": 5, "stress": -5 } },
+      { "id": "B", "text": "Viết một dòng vào nhật ký", "statEffects": { "stress": -7, "relationship": 2 } },
+      { "id": "C", "text": "Tắt đèn, không nghĩ gì nữa", "statEffects": { "energy": 8, "stress": -3 } }
+    ]
+  },
+  {
+    "id": "EV31_PAPERWORK_DONE",
+    "day": 3,
+    "type": "notification",
+    "sender": "cityhall",
+    "senderName": "Hệ thống",
+    "background": "cityhall",
+    "tags": ["branch"],
+    "messages": [
+      "[Hoàn tất] Resident card + my number đã đăng ký xong.",
+      "Bạn vừa né được một con đường rất dài đầy giấy tờ."
+    ],
+    "choices": [
+      { "id": "A", "text": "Xong việc lớn. Thở ra.", "statEffects": { "stress": -8, "money": 4 }, "setFlags": ["paperwork_done"] }
+    ]
+  },
+  {
+    "id": "EV32_PAPERWORK_LATE",
+    "day": 4,
+    "type": "notification",
+    "sender": "cityhall",
+    "senderName": "Hệ thống",
+    "background": "cityhall",
+    "tags": ["branch"],
+    "messages": [
+      "[Cảnh báo] Bạn vẫn chưa đăng ký cư trú.",
+      "Một số dịch vụ (ngân hàng, hợp đồng) bị treo đến khi xong."
+    ],
+    "choices": [
+      { "id": "A", "text": "Đi luôn hôm nay, một mình", "statEffects": { "energy": -12, "language": 5, "stress": 4, "money": -5 }, "setFlags": ["paperwork_done"] },
+      { "id": "B", "text": "Nhắn Linh xin đi cùng lần nữa", "statEffects": { "energy": -8, "language": 3, "relationship": -2 }, "setFlags": ["paperwork_done"] }
+    ]
+  },
+  {
+    "id": "EV33_FINE_LATE",
+    "day": 5,
+    "type": "mail",
+    "sender": "cityhall",
+    "senderName": "Hệ thống",
+    "background": "cityhall",
+    "tags": ["branch"],
+    "messages": [
+      "[Phạt trễ] Bạn bị phạt vì xử lý giấy tờ chậm.",
+      "Trừ 12,000 yên."
+    ],
+    "choices": [
+      { "id": "A", "text": "Nuốt vào. Lần sau làm sớm.", "statEffects": { "money": -12, "stress": 6 }, "setFlags": ["paperwork_late"] }
+    ]
+  },
+  {
+    "id": "EV34_THINK_GO_HOME",
+    "day": 7,
+    "type": "system",
+    "sender": "self",
+    "senderName": "Trong đầu",
+    "background": "station_night",
+    "tags": ["branch"],
+    "messages": [
+      "Hình ảnh sân bay hiện lên trong đầu bạn.",
+      "Cảm giác lao về phía mẹ là cảm giác duy nhất rõ ràng tuần này."
+    ],
+    "choices": [
+      { "id": "A", "text": "Vẫn ở lại. Một tuần nữa thôi.", "statEffects": { "stress": 5, "relationship": -2 } },
+      { "id": "B", "text": "Quyết tâm: đặt vé sớm.", "statEffects": { "money": -20, "stress": -5, "relationship": 6 } }
+    ]
+  },
+
+  {
+    "id": "EP_BURNOUT_1",
+    "day": 8,
+    "type": "system",
+    "sender": "self",
+    "senderName": "Sáng day 8",
+    "background": "tiny_room",
+    "tags": ["epilogue"],
+    "messages": [
+      "Báo thức kêu lần thứ 7. Bạn không tắt nữa.",
+      "Trần nhà thấp hơn tuần trước. Tin nhắn của mẹ vẫn ở đó, chưa mở.",
+      "Bạn nhắm mắt. 'Một giây thôi.'"
+    ],
+    "choices": [
+      { "id": "A", "text": "...", "statEffects": {} }
+    ]
+  },
+  {
+    "id": "EP_BURNOUT_2",
+    "day": 8,
+    "type": "system",
+    "sender": "neighbor",
+    "senderName": "Bà Sato",
+    "background": "tiny_room",
+    "tags": ["epilogue"],
+    "messages": [
+      "Khi bạn mở mắt ra, bên ngoài đã chiều.",
+      "Bạn không biết mình đã ngủ hay đã chết một chút.",
+      "Có người gõ cửa rất nhẹ. Hai tiếng. Rồi im."
+    ],
+    "choices": [
+      { "id": "A", "text": "Không trả lời.", "statEffects": {} }
+    ]
+  },
+  {
+    "id": "EP_GOHOME_1",
+    "day": 8,
+    "type": "system",
+    "sender": "neighbor",
+    "senderName": "Trước cửa phòng",
+    "background": "tiny_room",
+    "tags": ["epilogue"],
+    "messages": [
+      "Vali nhẹ hơn lúc bạn đến.",
+      "Trước cửa có một hộp okazu. Trên nắp ghi: 'ăn dọc đường nha.'",
+      "Bạn không kịp gõ cửa cảm ơn — bà Sato đã lùi vào trong rồi."
+    ],
+    "choices": [
+      { "id": "A", "text": "Cúi đầu trước cánh cửa đóng.", "statEffects": {} }
+    ]
+  },
+  {
+    "id": "EP_GOHOME_2",
+    "day": 8,
+    "type": "system",
+    "sender": "self",
+    "senderName": "Sân bay Haneda",
+    "background": "station_night",
+    "tags": ["epilogue"],
+    "messages": [
+      "Người đông nhưng yên. Bạn không gọi cho ai.",
+      "Ở cổng đến Tân Sơn Nhất, mẹ không hỏi tại sao.",
+      "Mẹ chỉ ôm. Có những trở về không phải là thua."
+    ],
+    "choices": [
+      { "id": "A", "text": "Khóc, lần này không giấu nữa.", "statEffects": {} }
+    ]
+  },
+  {
+    "id": "EP_SURVIVE_1",
+    "day": 8,
+    "type": "system",
+    "sender": "self",
+    "senderName": "Sáng day 8",
+    "background": "tiny_room",
+    "tags": ["epilogue"],
+    "messages": [
+      "Chuông báo thức kêu một lần. Bạn dậy.",
+      "Bạn pha cà phê đắng. Mở tủ lạnh — còn 2 quả trứng và một hộp natto.",
+      "Đủ tiền tuần này. Đủ năng lượng. Đủ một lý do."
+    ],
+    "choices": [
+      { "id": "A", "text": "Mở cửa. Đi làm.", "statEffects": {} }
+    ]
+  },
+  {
+    "id": "EP_GROWTH_1",
+    "day": 8,
+    "type": "system",
+    "sender": "self",
+    "senderName": "Sáng day 8",
+    "background": "konbini",
+    "tags": ["epilogue"],
+    "messages": [
+      "Bạn không cần đặt báo thức cũng dậy.",
+      "Đi qua bà chủ konbini, bà gọi tên bạn — và phát âm đúng.",
+      "Bạn dừng lại 1 giây vì điều đó."
+    ],
+    "choices": [
+      { "id": "A", "text": "Cười. Cảm ơn bằng tiếng Nhật.", "statEffects": {} }
+    ]
+  },
+  {
+    "id": "EP_GROWTH_2",
+    "day": 8,
+    "type": "system",
+    "sender": "self",
+    "senderName": "Tối day 8",
+    "background": "tiny_room",
+    "tags": ["epilogue"],
+    "messages": [
+      "Bạn ngồi xem một bài N3 mới.",
+      "Có chỗ bạn còn không hiểu, nhưng bạn không tắt máy nữa.",
+      "Tuần thứ hai đã bắt đầu. Tuần này bạn không lo nữa — bạn làm."
+    ],
+    "choices": [
+      { "id": "A", "text": "Đóng laptop. Ngủ.", "statEffects": {} }
+    ]
+  },
+  {
+    "id": "EP_BELONGING_1",
+    "day": 8,
+    "type": "system",
+    "sender": "neighbor",
+    "senderName": "Bà Sato",
+    "background": "tiny_room",
+    "tags": ["epilogue"],
+    "messages": [
+      "Sáng day 8. Bà Sato gõ cửa.",
+      "Lần này không có cơm — chỉ có một ấm trà nhỏ và một chậu cây mini.",
+      "「これ、あなたの部屋に。」 — 'Cái này, để trong phòng cậu.'"
+    ],
+    "choices": [
+      { "id": "A", "text": "「ありがとうございます。本当に。」", "statEffects": {} }
+    ]
+  },
+  {
+    "id": "EP_BELONGING_2",
+    "day": 8,
+    "type": "system",
+    "sender": "self",
+    "senderName": "Tối day 8",
+    "background": "tiny_room",
+    "tags": ["epilogue"],
+    "messages": [
+      "Kenta nhắn 'thứ 7 izakaya nha'. Linh nhắn 'cuối tuần qua nhà tao'.",
+      "Mẹ video call. Bạn không giấu mệt nữa — bạn cười thật.",
+      "Tokyo vẫn không phải nhà. Nhưng tuần này, có một góc nhỏ là của bạn."
+    ],
+    "choices": [
+      { "id": "A", "text": "Tắt đèn. Ngủ ngon.", "statEffects": {} }
+    ]
+  }
+]
