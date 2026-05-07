@@ -133,7 +133,7 @@
     "messages": [
       "[Thư từ thành phố] Bạn cần đăng ký cư trú trong vòng 14 ngày.",
       "Phí phạt nếu trễ: ~10,000 yên.",
-      "Văn bản dày, toàn kanji."
+      "Sáu trang, kanji không có furigana, kèm 1 form 在留カード bạn chưa từng nhìn."
     ],
     "choices": [
       { "id": "A", "text": "Hôm nay đi luôn, cùng Linh", "statEffects": { "energy": -10, "language": 4 } },

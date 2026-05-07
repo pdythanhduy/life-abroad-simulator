@@ -116,7 +116,7 @@ export default function HowToPlayScreen({
           onClick={onContinue}
           className="flex-[2] py-3 rounded-xl bg-accent text-ink font-medium"
         >
-          Bắt đầu →
+          Chọn độ khó →
         </button>
       </div>
     </div>
