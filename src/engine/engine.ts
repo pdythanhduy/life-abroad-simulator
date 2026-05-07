@@ -84,10 +84,11 @@ function eventsForDay(day: number): string[] {
 export function newGame(difficulty: Difficulty): SaveState {
   const day = 1;
   const queue = eventsForDay(day);
+  const stats = { ...STARTING_STATS[difficulty] };
   return {
     difficulty,
     day,
-    stats: { ...STARTING_STATS[difficulty] },
+    stats,
     flags: {},
     history: [],
     pending: [],
@@ -96,6 +97,8 @@ export function newGame(difficulty: Difficulty): SaveState {
     currentEventId: queue[0] ?? null,
     ending: null,
     startedAt: Date.now(),
+    dayStartStats: { ...stats },
+    pendingRecap: null,
   };
 }
 
@@ -172,6 +175,8 @@ export function chooseOption(state: SaveState, choice: Choice): SaveState {
 
   let day = state.day;
   let ending = state.ending;
+  let dayStartStats = state.dayStartStats;
+  let pendingRecap = state.pendingRecap;
 
   // 6. Day end / ending resolution
   if (queue.length === 0) {
@@ -186,6 +191,8 @@ export function chooseOption(state: SaveState, choice: Choice): SaveState {
       );
       queue = epilogueIds;
     } else {
+      const dayJustEnded = day;
+      const startOfDayStats = dayStartStats;
       day += 1;
       const sleep = SLEEP_TICK[state.difficulty];
       stats = applyEffect(stats, sleep);
@@ -199,6 +206,13 @@ export function chooseOption(state: SaveState, choice: Choice): SaveState {
       const dayEvents = eventsForDay(day).filter((id) => !completedSet.has(id));
       const next = [...triggered, ...dayEvents];
       queue = next.filter((id, i) => next.indexOf(id) === i);
+
+      pendingRecap = {
+        day: dayJustEnded,
+        before: startOfDayStats,
+        after: stats,
+      };
+      dayStartStats = stats;
     }
   }
 
@@ -213,5 +227,12 @@ export function chooseOption(state: SaveState, choice: Choice): SaveState {
     currentEventId: queue[0] ?? null,
     day,
     ending,
+    dayStartStats,
+    pendingRecap,
   };
+}
+
+export function dismissRecap(state: SaveState): SaveState {
+  if (!state.pendingRecap) return state;
+  return { ...state, pendingRecap: null };
 }

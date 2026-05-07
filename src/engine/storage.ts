@@ -31,6 +31,9 @@ function migrate(raw: unknown): SaveState | null {
   }
 
   const stats: Stats = { ...DEFAULT_STATS, ...(r.stats ?? {}) };
+  const dayStartStats: Stats = r.dayStartStats
+    ? { ...DEFAULT_STATS, ...r.dayStartStats }
+    : { ...stats };
 
   return {
     difficulty: r.difficulty,
@@ -44,6 +47,8 @@ function migrate(raw: unknown): SaveState | null {
     currentEventId: typeof r.currentEventId === "string" ? r.currentEventId : null,
     ending: r.ending ?? null,
     startedAt: typeof r.startedAt === "number" ? r.startedAt : Date.now(),
+    dayStartStats,
+    pendingRecap: r.pendingRecap ?? null,
   };
 }
 

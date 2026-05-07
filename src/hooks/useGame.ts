@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import type { Choice, Difficulty, SaveState } from "../types/game";
-import { chooseOption, getEvent, newGame } from "../engine/engine";
+import { chooseOption, dismissRecap, getEvent, newGame } from "../engine/engine";
 import { clearGame, loadGame, saveGame } from "../engine/storage";
 
 export type Screen =
@@ -73,6 +73,11 @@ export function useGame() {
     setTutorialSeenState(true);
   }
 
+  function continueFromRecap() {
+    if (!state) return;
+    setState(dismissRecap(state));
+  }
+
   return {
     state,
     screen,
@@ -83,6 +88,7 @@ export function useGame() {
     reset,
     tutorialSeen,
     markTutorialSeen,
+    continueFromRecap,
     hasSave: !!state && !!state.currentEventId,
   };
 }

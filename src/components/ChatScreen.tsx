@@ -64,16 +64,19 @@ export default function ChatScreen({
       <div className="flex items-center justify-between px-3 py-2 bg-panel/70 border-b border-line">
         <button
           onClick={() => setScreen("home")}
-          className="text-soft text-sm w-8 text-left"
-          aria-label="Back"
+          className="text-soft text-sm flex items-center gap-1"
+          aria-label="Back to home (auto-saved)"
+          title="Quay về Home — game đã tự lưu"
         >
-          ←
+          <span>←</span>
+          <span className="text-[10px] text-soft/70 leading-none">tự lưu</span>
         </button>
-        <div className="text-sm">{event?.senderName ?? "—"}</div>
+        <div className="text-sm truncate max-w-[55%]">{event?.senderName ?? "—"}</div>
         <button
           onClick={() => setScreen("history")}
-          className="text-soft text-sm w-8 text-right"
+          className="text-soft text-sm"
           aria-label="History"
+          title="Nhật ký các lựa chọn"
         >
           ≡
         </button>

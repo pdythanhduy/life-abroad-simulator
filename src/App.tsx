@@ -6,6 +6,7 @@ import ChatScreen from "./components/ChatScreen";
 import HistoryScreen from "./components/HistoryScreen";
 import SettingsScreen from "./components/SettingsScreen";
 import EndingScreen from "./components/EndingScreen";
+import DayRecapScreen from "./components/DayRecapScreen";
 
 export default function App() {
   const {
@@ -19,6 +20,7 @@ export default function App() {
     hasSave,
     tutorialSeen,
     markTutorialSeen,
+    continueFromRecap,
   } = useGame();
 
   const safeStart = (d: Parameters<typeof start>[0]) => {
@@ -51,12 +53,16 @@ export default function App() {
           <DifficultyScreen onPick={safeStart} onBack={() => setScreen("home")} />
         )}
         {screen === "chat" && state && (
-          <ChatScreen
-            state={state}
-            event={currentEvent}
-            onPick={pick}
-            setScreen={setScreen}
-          />
+          state.pendingRecap ? (
+            <DayRecapScreen recap={state.pendingRecap} onContinue={continueFromRecap} />
+          ) : (
+            <ChatScreen
+              state={state}
+              event={currentEvent}
+              onPick={pick}
+              setScreen={setScreen}
+            />
+          )
         )}
         {screen === "history" && state && (
           <HistoryScreen state={state} onBack={() => setScreen("chat")} />

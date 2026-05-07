@@ -80,6 +80,12 @@ export interface PendingEvent {
   triggerDay: number;
 }
 
+export interface DayRecap {
+  day: number;
+  before: Stats;
+  after: Stats;
+}
+
 export interface SaveState {
   difficulty: Difficulty;
   day: number;
@@ -92,4 +98,6 @@ export interface SaveState {
   currentEventId: string | null;
   ending: EndingId | null;
   startedAt: number;
+  dayStartStats: Stats;
+  pendingRecap: DayRecap | null;
 }
