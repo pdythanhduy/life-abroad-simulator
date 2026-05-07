@@ -17,6 +17,19 @@ const EVENT_MAP: Record<string, GameEvent> = Object.fromEntries(
   ALL_EVENTS.map((e) => [e.id, e]),
 );
 
+// Precompute the per-day event list so day-advance is O(events_in_day)
+// rather than O(all_events). Branch and epilogue events are excluded;
+// they enter the queue only via delayed consequences or ending resolution.
+const EVENTS_BY_DAY: Record<number, string[]> = (() => {
+  const map: Record<number, string[]> = {};
+  for (const e of ALL_EVENTS) {
+    const tags = e.tags ?? [];
+    if (tags.includes("branch") || tags.includes("epilogue")) continue;
+    (map[e.day] ||= []).push(e.id);
+  }
+  return map;
+})();
+
 export const FINAL_DAY = 7;
 
 const EPILOGUE: Record<EndingId, string[]> = {
@@ -65,14 +78,7 @@ export function resolveEvent(
 }
 
 function eventsForDay(day: number): string[] {
-  return ALL_EVENTS
-    .filter(
-      (e) =>
-        e.day === day &&
-        !e.tags?.includes("branch") &&
-        !e.tags?.includes("epilogue"),
-    )
-    .map((e) => e.id);
+  return EVENTS_BY_DAY[day] ?? [];
 }
 
 export function newGame(difficulty: Difficulty): SaveState {
@@ -150,11 +156,17 @@ export function chooseOption(state: SaveState, choice: Choice): SaveState {
     });
   }
 
-  // 5. Mark complete and rebuild queue
+  // 5. Mark complete (track in a Set so we can dedup queue inserts)
   const completedEventIds = [...state.completedEventIds, current.id];
+  const completedSet = new Set(completedEventIds);
 
   let queue = state.queue.filter((id) => id !== current.id);
-  if (choice.nextEventId && EVENT_MAP[choice.nextEventId]) {
+  if (
+    choice.nextEventId &&
+    EVENT_MAP[choice.nextEventId] &&
+    !completedSet.has(choice.nextEventId) &&
+    !queue.includes(choice.nextEventId)
+  ) {
     queue = [choice.nextEventId, ...queue];
   }
 
@@ -170,7 +182,7 @@ export function chooseOption(state: SaveState, choice: Choice): SaveState {
       const resolved = resolveEnding(stats);
       ending = resolved;
       const epilogueIds = (EPILOGUE[resolved] ?? []).filter(
-        (id) => EVENT_MAP[id],
+        (id) => EVENT_MAP[id] && !completedSet.has(id),
       );
       queue = epilogueIds;
     } else {
@@ -181,10 +193,11 @@ export function chooseOption(state: SaveState, choice: Choice): SaveState {
       const triggered = pending
         .filter((p) => p.triggerDay <= day)
         .map((p) => p.eventId)
-        .filter((id) => EVENT_MAP[id]);
+        .filter((id) => EVENT_MAP[id] && !completedSet.has(id));
       pending = pending.filter((p) => p.triggerDay > day);
 
-      const next = [...triggered, ...eventsForDay(day)];
+      const dayEvents = eventsForDay(day).filter((id) => !completedSet.has(id));
+      const next = [...triggered, ...dayEvents];
       queue = next.filter((id, i) => next.indexOf(id) === i);
     }
   }
