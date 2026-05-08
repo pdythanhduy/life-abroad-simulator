@@ -156,3 +156,92 @@ Cần thêm 1 lượt cho Go Home — khả năng cao là Hard + send money + vi
 - Engine balance — 4/5 persona khớp expected, lệch duy nhất là close-call. Đợi 5–10 tester thật trước khi chỉnh threshold.
 - Stress/Rel cap signal — design issue, defer V0.2.
 - Day 7 chỉ có 2 regular events (validator vẫn cảnh báo) — nội dung fix, không trong scope sprint này.
+
+---
+
+## Self-playtest run 2 — Persona 6: Go Home verification
+
+Run 1 (Sprint 11) hit 4/5 endings. **Go Home chưa được hit.** Run 2 này verify path đó có reachable hay không. Engine version: `c2084e2`.
+
+### Persona 6 — "Người về nhà"
+
+- **Difficulty:** Hard (money 30, energy 50, stress 55, lang 15, rel 30 / sleep +10/-3)
+- **Khẩu vị:** tank money sớm + vừa, manage stress để không overshoot Burnout. Ice các NPC quan hệ vừa phải.
+
+### Route choices (concise)
+
+| Day | Choices |
+|---|---|
+| **1** | EV01 A (mở vali) · EV02 A (giấu mẹ → `m_d1_hid`) · EV03 C (đóng cửa nhanh → `sato_d1_cold`) · EV04 C (tự đi → `linh_d1_solo`) · EV05 A (nhắm mắt) |
+| **2** | EV06 A · EV07 B (humble → `mgr_d2_humble`) · **EV08 B (để cuối tuần → delay EV33 day 5)** · EV09 A · EV10 A (hỏi lại) |
+| **3** | EV11 C (cười xã giao) · EV12 A (giấu mẹ → `m_d3_hid`) · EV13 A (ghi nhớ rent) · **EV14 A (đóng full bảo hiểm: −18 money)** · EV15 C (im lặng với Linh → `linh_d3_iced`) |
+| **4** | EV16 C (đếm 1000) · **EV17 B (`mgr_d4_no` — từ chối extra shift)** · EV18 C (skip tea → `sato_d4_no`) · EV19 A (cúi đầu xin lỗi) · EV35 A (tự đi) · EV20 B (tắt não, ăn mì, ngủ) |
+| **5** | EV33 A (nuốt phạt: −12 money) · EV21 B (forum) · **EV22 B (book vé về: −25 money, `mom_d5_visit`, delay EV34 day 7)** · EV36 C (hẹn lại) · EV23 B (next time) · EV24 A (cơm tamago) |
+| **6** | EV25 A · **EV26 B (`mgr_d4_no` variant: chỉ tăng nhẹ, `mgr_d6_rest`)** · EV27 C (đem hộp vào không nói gì) · EV28 C (chưa biết, vẫn dậy) |
+| **7** | **EV34 B (đặt vé sớm: −20 money)** · EV29 C "Mẹ ơi, con muốn về" (mom_d5_visit variant) · EV30 A (khép sổ) |
+
+Bold = các choice đẩy money xuống hoặc giữ stress dưới 80.
+
+### Stress-management timeline
+
+| End of day | Stress | Note |
+|---|---|---|
+| Day 1 | 59 | Sleep tick −3 → 56 |
+| Day 2 | 55 | Cẩn thận, không pick "đoán đại" (B = +7 stress) |
+| Day 3 | 64 | Sleep → 61 |
+| Day 4 | 64 | Skip tea + refuse shift → tránh +stress mạnh |
+| Day 5 | **84** | EV33 phạt +6, EV22 +8, EV24 +3 → cao đỉnh. Sleep → 81. **1 stress nữa là Burnout** |
+| Day 6 | 68 | EV25 −5, EV26 rest variant −5, EV28 −5 → kéo xuống an toàn |
+| Day 7 | 50 (final) | EV34 −5, EV29 C −8, EV30 −5 |
+
+### Final stats
+
+| Stat | Value | Threshold |
+|---|---|---|
+| Money | **0** | < 15 → **Go Home trigger** ✓ |
+| Energy | 100 | ≥ 25 → not Burnout ✓ |
+| Stress | 50 | ≤ 80 → not Burnout ✓ |
+| Language | 41 | — |
+| Relationship | 45 | ≥ 20 → not Go Home via rel |
+
+### Ending thực tế
+
+**Go Home** ✓ (đúng kỳ vọng).
+
+Resolver check:
+1. energy 100 ≥ 25 và stress 50 ≤ 80 → not burnout
+2. money 0 < 15 → **gohome**
+
+Mom variant 2 (`mom_d5_visit`) fired ở EV29: *"Em nó nói con tính đặt vé về tuần này. Mẹ giận đó."* Player chọn C "Mẹ ơi, con muốn về" → narrative khớp với ending Go Home. Epilogue play đúng (`EP_GOHOME_1` — bà Sato để hộp okazu trước cửa, → `EP_GOHOME_2` — sân bay Haneda, mẹ ôm).
+
+### Findings
+
+**Positive:**
+
+- **Go Home reachable on Hard.** Path money-tank với 5 events tốn tiền (insurance full + city hall fine + book vé + sớm vé + cơm tamago) đẩy money từ 30 → 0 trong 7 ngày.
+- **EV34 (delayed từ `mom_d5_visit`)** là cầu nối narrative đẹp: book vé ở day 5, day 7 chính thức "quyết tâm: đặt vé sớm". Game biết bạn đang định về và đẩy thêm 1 beat phù hợp.
+- **EV29 mom variant 2 (`mom_d5_visit`)** + chọn C "muốn về" tạo cảm giác ending có lý do, không phải số học khô.
+- **Mom variant + ending body của Go Home** (sân bay, mẹ chỉ ôm) có sự đối thoại — đầu đuôi khớp.
+
+**Soft issue (đã suspect ở run 1, run này confirm):**
+
+- **Burnout precedence ép Go Home rất tight trên Hard.** Stress đỉnh day 5 = 84 (sau sleep còn 81). Một choice +stress nữa ở giai đoạn này → Burnout, không phải Go Home. Player chủ ý go-home phải chủ ý chọn rest/calm options ở day 5–6 để stress không vượt 80.
+- Nếu chuỗi tester thật báo "tôi muốn về nhà nhưng game nói tôi burnout" → cân nhắc nâng burnout threshold lên 85 trên Hard, hoặc đảo precedence (gohome trước burnout). Nhưng **chưa có data tester thật, không fix.**
+
+### Proposed fix
+
+**Không fix lần này.** Go Home reachable, mechanic works as designed. Burnout-trước-Go-Home là chủ ý (Burnout là tình trạng cấp cứu hơn). Tight margin trên Hard có thể là chủ ý (Hard = không có buffer). 
+
+Note cho V0.2 (chỉ làm khi tester thật phàn nàn): cân nhắc đảo precedence resolver hoặc nới burnout 85 thay vì 80 trên Hard.
+
+### Endings hit so far (run 1 + run 2)
+
+| Ending | Personas hit | Khớp expected? |
+|---|---|---|
+| Belonging | 1, 5 | ✓ |
+| Growth | 2 (close-call) | close-call |
+| Survive | 3 (close-call, stress 79/80) | close-call |
+| Burnout | 4 | ✓ |
+| Go Home | **6 (verified)** | ✓ |
+
+5/5 endings reachable trong tự test. Engine threshold + variant chain + epilogue queue làm việc đúng. Đợi data từ tester thật trước khi đụng balance.
