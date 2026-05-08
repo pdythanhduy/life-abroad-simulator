@@ -28,6 +28,8 @@ export default function DifficultyScreen({
       <div className="flex-1 px-4 pt-4 pb-safe space-y-3 overflow-y-auto scrollbar-thin">
         <div className="text-[11px] text-soft leading-relaxed mb-1">
           <span className="text-accent">Mục tiêu:</span> sống sót 7 ngày ở Tokyo — và tìm một lý do để tiếp tục.
+          <br />
+          <span className="opacity-80">Cả 3 độ khó dùng chung sự kiện và ending — chỉ khác chỉ số khởi đầu và mức hồi phục mỗi đêm.</span>
         </div>
         {items.map((d) => {
           const s = STARTING_STATS[d];

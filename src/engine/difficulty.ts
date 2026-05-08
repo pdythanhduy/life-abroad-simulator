@@ -13,13 +13,15 @@ export const SLEEP_TICK: Record<Difficulty, { energy: number; stress: number }> 
 };
 
 export const DIFFICULTY_LABEL: Record<Difficulty, string> = {
-  easy:   "Easy — có người đỡ",
-  normal: "Normal — tự lập",
-  hard:   "Hard — không ai đỡ",
+  easy:   "Easy — dễ thở hơn",
+  normal: "Normal — cân bằng",
+  hard:   "Hard — áp lực nặng hơn",
 };
 
+// Cả 3 độ khó dùng chung 30+ sự kiện và 5 ending. Khác biệt duy nhất:
+// chỉ số khởi đầu (stats lúc Day 1) và mức hồi phục mỗi đêm (sleep tick).
 export const DIFFICULTY_DESC: Record<Difficulty, string> = {
-  easy:   "Người chơi mới. Tiền nhiều hơn, ít stress, có sẵn quan hệ.",
-  normal: "Trải nghiệm chuẩn. Tự xoay sở, đánh đổi mỗi lựa chọn.",
-  hard:   "Không ai đỡ. Tiền ít, stress cao, dễ bad ending. Chỉ chơi khi muốn đau.",
+  easy:   "Cùng câu chuyện. Stat khởi đầu cao, mỗi đêm hồi phục mạnh. Có buffer để thử nghiệm lựa chọn.",
+  normal: "Cùng câu chuyện. Stat khởi đầu cân bằng, hồi phục vừa đủ. Mỗi lựa chọn thật sự là đánh đổi.",
+  hard:   "Cùng câu chuyện. Stat khởi đầu thấp, hồi phục ít. Một lựa chọn sai có thể đẩy thẳng tới bad ending.",
 };

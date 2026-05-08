@@ -102,11 +102,14 @@ export default function HowToPlayScreen({
         <section className="pt-2">
           <div className="text-[10px] tracking-[0.3em] text-soft mb-2">3 ĐỘ KHÓ</div>
           <div className="text-xs text-soft leading-relaxed">
-            <span className="text-emerald-300">Easy</span> — tiền nhiều, ít stress, có sẵn quan hệ. Dành cho lần đầu.
+            Cả 3 độ khó cùng câu chuyện, cùng sự kiện, cùng ending. Chỉ khác chỉ số khởi đầu và mức hồi phục mỗi đêm.
+          </div>
+          <div className="text-xs text-soft leading-relaxed mt-2">
+            <span className="text-emerald-300">Easy</span> — dễ thở hơn. Stat khởi đầu cao, đêm hồi phục mạnh.
             <br />
-            <span className="text-amber-300">Normal</span> — mode chuẩn. Tự xoay sở.
+            <span className="text-amber-300">Normal</span> — cân bằng. Mode chuẩn, mỗi lựa chọn là đánh đổi.
             <br />
-            <span className="text-rose-300">Hard</span> — không ai đỡ. Dễ rơi vào bad ending. Chơi khi muốn đau.
+            <span className="text-rose-300">Hard</span> — áp lực nặng hơn. Stat khởi đầu thấp, hồi phục ít.
           </div>
         </section>
       </div>
