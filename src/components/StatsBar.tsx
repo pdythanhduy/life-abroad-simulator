@@ -22,6 +22,15 @@ export default function StatsBar({ stats, day }: { stats: Stats; day: number }) 
           const v = stats[it.key];
           const pct = Math.max(0, Math.min(100, v));
           const danger = it.bad ? v > 70 : v < 25;
+          // Cap indicators — when stat is at its "best" or "worst" extreme,
+          // additional changes won't register. Surface that to the player.
+          const cappedGood = it.bad ? v <= 0 : v >= 100;
+          const cappedBad = it.bad ? v >= 100 : v <= 0;
+          const valueClass = cappedGood
+            ? "text-emerald-300 font-medium"
+            : cappedBad
+            ? "text-rose-300 font-medium animate-pulse"
+            : "text-soft";
           return (
             <div key={it.key} className="flex flex-col items-center min-w-0">
               <div className="text-[10px] text-soft mb-1 whitespace-nowrap leading-none">
@@ -35,7 +44,18 @@ export default function StatsBar({ stats, day }: { stats: Stats; day: number }) 
                   style={{ width: `${pct}%` }}
                 />
               </div>
-              <div className="text-[10px] mt-1 text-soft tabular-nums">{Math.round(v)}</div>
+              <div
+                className={`text-[10px] mt-1 tabular-nums leading-none ${valueClass}`}
+                title={
+                  cappedGood
+                    ? "Đang ở đỉnh — thêm cũng không tăng nữa"
+                    : cappedBad
+                    ? "Đang chạm đáy — không thể giảm nữa"
+                    : undefined
+                }
+              >
+                {Math.round(v)}
+              </div>
             </div>
           );
         })}

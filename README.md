@@ -23,7 +23,15 @@ Nếu bạn đã chơi xong (hoặc bỏ giữa) 1 lượt, vui lòng trả lờ
 
 Gửi feedback: tạo issue tại https://github.com/pdythanhduy/life-abroad-simulator/issues — hoặc nhắn trực tiếp cho người đã share link cho bạn.
 
-Nếu bạn là người đang tổ chức playtest: dùng template tại [`docs/playtest-feedback.md`](./docs/playtest-feedback.md) — có sẵn bảng ghi tester, 4 câu hỏi, và 5 persona tự test khi chưa đủ người chơi thật.
+### Tester docs
+
+| File | Khi nào dùng |
+|---|---|
+| [`docs/tester-guide.md`](./docs/tester-guide.md) | Gửi cho tester trước khi họ chơi — kỳ vọng, mindset, content warning |
+| [`docs/tester-feedback-form.md`](./docs/tester-feedback-form.md) | Tester paste vào tin nhắn / issue điền sau khi chơi (5 câu, ~3 phút) |
+| [`docs/playtest-feedback.md`](./docs/playtest-feedback.md) | Bảng tổng hợp internal — ghi từng tester + self-test 6 persona |
+| [`docs/social-drafts.md`](./docs/social-drafts.md) | 3 draft post (devlog / du học sinh / emotional) — chỉnh trước khi đăng |
+| [`docs/analytics-v0.md`](./docs/analytics-v0.md) | Planning doc — track gì khi V0.2 bật analytics. Chưa implement. |
 
 ## Yêu cầu
 
