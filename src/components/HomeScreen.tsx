@@ -27,13 +27,14 @@ export default function HomeScreen({
           <br />
           Simulator
         </h1>
-        <div className="text-soft mt-3 text-sm leading-relaxed">
-          Year One Abroad. Bảy ngày đầu, một căn phòng nhỏ, một thành phố không
-          nói tiếng mình. Mỗi tin nhắn là một lựa chọn không có đáp án đúng.
+        <div className="mt-4 text-sm leading-relaxed">
+          Chơi như đang trả lời tin nhắn trong 7 ngày đầu ở Nhật.
+          <br />
+          Không có đáp án đúng, chỉ có cách bạn chọn sống.
         </div>
 
         <div className="mt-6 border border-accent/30 bg-accent/10 rounded-2xl p-4">
-          <div className="text-[10px] tracking-[0.3em] text-accent mb-1">MISSION</div>
+          <div className="text-[10px] tracking-[0.3em] text-accent mb-1">MỤC TIÊU</div>
           <div className="text-sm leading-relaxed">
             Sống sót <span className="text-accent">7 ngày</span> ở Tokyo —
             <br />

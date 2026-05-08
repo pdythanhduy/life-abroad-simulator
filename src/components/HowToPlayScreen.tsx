@@ -30,6 +30,12 @@ export default function HowToPlayScreen({
       </div>
 
       <div className="flex-1 overflow-y-auto px-5 py-5 scrollbar-thin space-y-6">
+        <div className="text-sm leading-relaxed border-l-2 border-accent/40 pl-3">
+          Chơi như đang trả lời tin nhắn trong 7 ngày đầu ở Nhật.
+          <br />
+          Không có đáp án đúng, chỉ có cách bạn chọn sống.
+        </div>
+
         <section>
           <div className="text-[10px] tracking-[0.3em] text-soft mb-2">MỤC TIÊU</div>
           <div className="text-lg leading-snug">
@@ -38,7 +44,7 @@ export default function HowToPlayScreen({
             và tìm một lý do để tiếp tục tuần thứ 8.
           </div>
           <div className="text-xs text-soft mt-2 leading-relaxed">
-            Không có thắng. Không có thua. Chỉ có cách bạn muốn sống.
+            Không có thắng. Không có thua.
           </div>
         </section>
 
@@ -70,19 +76,15 @@ export default function HowToPlayScreen({
             </li>
             <li className="flex gap-2">
               <span className="text-accent">·</span>
-              <span>Mỗi sự kiện có 2–3 lựa chọn — tất cả đều có cái <em>được</em> và cái <em>mất</em>.</span>
+              <span>Mỗi tin nhắn có 2–3 lựa chọn — tất cả đều có cái <em>được</em> và cái <em>mất</em>.</span>
             </li>
             <li className="flex gap-2">
               <span className="text-accent">·</span>
-              <span>Một số lựa chọn có hậu quả vài ngày sau (bỏ thư city hall → bị phạt sau).</span>
+              <span>Một số lựa chọn có hậu quả vài ngày sau — bỏ thư hành chính hôm nay, tuần sau bị phạt.</span>
             </li>
             <li className="flex gap-2">
               <span className="text-accent">·</span>
-              <span>Không có "lựa chọn đúng". Có cách bạn muốn sống.</span>
-            </li>
-            <li className="flex gap-2">
-              <span className="text-accent">·</span>
-              <span>Game <span className="text-accent">tự lưu</span> sau mỗi lựa chọn — đóng app/refresh thoải mái.</span>
+              <span>Game <span className="text-accent">tự lưu</span> sau mỗi lựa chọn — đóng app / refresh thoải mái.</span>
             </li>
           </ul>
         </section>
