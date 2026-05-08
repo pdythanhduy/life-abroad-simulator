@@ -4,6 +4,25 @@ Game mô phỏng cuộc sống xa quê dạng chat. Season 1: Year One Abroad (7
 
 > Mục tiêu: sống sót 7 ngày ở Tokyo — và tìm một lý do để tiếp tục tuần thứ 8.
 
+## Trạng thái — v0.1 Public Playtest
+
+**Live:** https://life-abroad-simulator.vercel.app
+
+Đây là bản đầu tiên public để chơi thử. Story hoàn chỉnh từ Day 1 đến cả 5 ending, mobile-friendly, save lưu local theo browser/device.
+
+**Chưa có ở milestone này:** sound, art (chỉ vibe placeholder), cloud sync, account, payment, analytics. Content vẫn trong 1 file `events.json` — sẽ tách per-day khi bắt đầu V2 (30 ngày).
+
+## Phản hồi cần nhất
+
+Nếu bạn đã chơi xong (hoặc bỏ giữa) 1 lượt, vui lòng trả lời 4 câu sau — dù chỉ 1 dòng/câu cũng rất đắt giá ở giai đoạn này:
+
+1. **Bạn dừng ở đâu?** Hết Day 7 hay bỏ giữa chừng? Nếu bỏ — đoạn nào, vì sao?
+2. **Cảnh hoặc nhân vật nào nhớ nhất?** Một câu mẹ nói? Một lần lạc đường? Một event làm bạn ngần ngừ rất lâu mới chọn?
+3. **Bạn có muốn chơi lại không?** Để thử route khác, hay để xem nội dung khác? Nếu không — vì sao? (chán / đủ rồi / không đủ khác biệt)
+4. **Ending bạn nhận được có hợp lý không?** Thấy nó khớp với cách bạn chơi tuần đó không? Nếu cảm giác sai — sai chỗ nào?
+
+Gửi feedback: tạo issue tại https://github.com/pdythanhduy/life-abroad-simulator/issues — hoặc nhắn trực tiếp cho người đã share link cho bạn.
+
 ## Yêu cầu
 
 - Node.js 18+ (đã test trên Node 22)
@@ -230,6 +249,23 @@ npx cap open android
 ```
 
 Trong Android Studio: **Build → Build Bundle(s)/APK(s) → Build APK(s)**.
+
+## Changelog
+
+### v0.1.0 — Public Playtest
+
+| Sprint | Highlight |
+|---|---|
+| 1 | Engine dedup (no double-fire), defensive save migration, `npm run validate` script wired into build |
+| 2 | Autosave hint trên ChatScreen header, **Day Recap** giữa các ngày (stat delta colored, Stress inverted) |
+| 3 | +EV35 (lạc đường Shinjuku, không ai giúp), +EV36 (bank form fail, hanko thiếu), tone fix EV28 |
+| 4 | QA pass: HowTo button text, EV08 detail, README QA checklist 9 mục với expected variant text |
+| 5 | Mobile playtest polish (360–430px): tap targets 44×44, safe-area bottom, `100dvh`, break-words cho Japanese |
+| 6 | Vercel deploy: `vercel.json` SPA fallback, meta tags + og + theme-color, favicon SVG, README "Deploy on Vercel" |
+| 7 | First-time clarity: tagline *"Chơi như đang trả lời tin nhắn trong 7 ngày đầu ở Nhật. Không có đáp án đúng, chỉ có cách bạn chọn sống."* trên Home + HowTo |
+| 8 | Difficulty wording trung thực: "dễ thở hơn / cân bằng / áp lực nặng hơn" thay vì "có người đỡ / không ai đỡ" — cùng câu chuyện, khác chỉ số khởi đầu và hồi phục |
+
+**Initial MVP** (commit `aebcc94`): 5 stats · 3 difficulties · 5 endings · 32 main + 4 branch + 9 epilogue = 45 events · React + TS + Tailwind + Vite, no backend.
 
 ## Tài khoản git
 
