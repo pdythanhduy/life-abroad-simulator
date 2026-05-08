@@ -15,7 +15,7 @@ export default function StatsBar({ stats, day }: { stats: Stats; day: number }) 
         <span className="text-xs uppercase tracking-widest text-soft">
           Day {day} / 7
         </span>
-        <span className="text-xs text-soft">Tokyo · 23°C</span>
+        <span className="text-xs text-soft">Tokyo · 23:47</span>
       </div>
       <div className="grid grid-cols-5 gap-2">
         {ITEMS.map((it) => {

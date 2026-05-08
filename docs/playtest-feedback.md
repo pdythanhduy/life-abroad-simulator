@@ -99,3 +99,60 @@ Ghi vào bảng feedback ở trên, cột **Tester** đặt là `Self/Persona 1`
 
 Nếu cả 5 persona đều ra Survive → endings không đủ phân hoá, cần spread threshold rộng hơn.
 Nếu Persona 4 không tới Burnout dù chơi đúng kịch bản → energy/stress balance trên Hard quá hiền.
+
+---
+
+## Self-playtest run 1
+
+Trace 5 persona theo description ở trên (DevTools 390×844, Vite dev server). Reset save giữa các lượt. Engine version: `f1b1e58` (Sprint 8).
+
+### Bảng kết quả
+
+| # | Persona | Difficulty | Reached | Ending | Khớp expected? | Scene nhớ nhất | Confusing / chán |
+|---|---|---|---|---|---|---|---|
+| 1 | Người con ngoan | Easy | Day 7 | **Belonging** | ✓ (expected Belonging/Growth) | EV27 variant `sato_d4_tea` "Sang ăn chè cùng bà" | Relationship đụng cap 100 từ day 4 — late rel-positive choices feel flat |
+| 2 | Người tự chứng minh | Normal | Day 7 | **Growth** | ✗ (expected Survive/Burnout) | EV29 variant 5 "Mẹ không hỏi nữa. Mẹ biết con không trả lời thật bao giờ." | — |
+| 3 | Người dối lòng | Normal | Day 7 | **Survive** | ✓ (expected Survive/Go Home) | EV29 variant 5 (cùng câu trên) | Stress đụng cap 100 mid-week — sau đó +stress vô hình |
+| 4 | Người sụp đổ | Hard | Day 7 | **Burnout** | ✓ | Burnout epilogue (báo thức kêu lần 7) + EV29 v5 callback | Stress capped 100 từ day 4 — late events mất tín hiệu stress |
+| 5 | Người nhập gia | Normal | Day 7 | **Belonging** | ✓ | EV23 variant `cust_d4_stood` "Cool đó. Hôm trước thấy mày cãi với khách bằng tiếng Nhật." | Money tụt xuống 11 ở cuối day 5 — Go Home gần lắm, day 6 OT cứu |
+
+**Kết:** 4/5 khớp expected. Persona 2 lệch (Growth thay vì Survive/Burnout — close-call: stress 59/60 boundary). Persona 5 close-call về money (11 vs 15 threshold).
+
+### Endings hit so far
+
+| Ending | Personas hit |
+|---|---|
+| Belonging | 1, 5 |
+| Growth | 2 (close-call) |
+| Survive | 3 (close-call, stress 79/80) |
+| Burnout | 4 |
+| Go Home | (chưa) |
+
+Cần thêm 1 lượt cho Go Home — khả năng cao là Hard + send money + visit + ice all NPCs. Defer sang run kế tiếp.
+
+### Findings
+
+**Positive — variants and callbacks land well:**
+
+- **EV29 variant 5** (`m_d1_hid` + `m_d3_hid`) là dòng được nhớ nhất bởi 3/5 persona (2, 3, 4). "Mẹ không hỏi nữa" là gut-punch đúng cho người chơi giấu cảm xúc cả tuần.
+- **EV23 variant `cust_d4_stood`** ("Cool đó") là callback positive nhất — hit khi player đứng vững với khách say day 4. Persona 5 gọi đây là khoảnh khắc làm họ đổi cách nghĩ về Kenta.
+- **EV27 variant `sato_d4_tea`** (chè đậu đỏ + choice "Sang ăn chè cùng bà") là moment cảm xúc nặng nhất bên ngoài mom arc.
+
+**Soft issues — không đến mức bug, nhưng để ý cho V0.2:**
+
+1. **Stress 100 cap eats signal.** Persona 3 và 4 hit cap mid-week, sau đó mọi lựa chọn +stress đều vô hình. Player mất tín hiệu. → V0.2 cân nhắc visual MAX indicator trên StatsBar khi stat = 0 hoặc 100.
+2. **Relationship 100 cap dễ đạt trên Easy + warm play.** Persona 1 đụng cap day 4. Late-game rel-positive choices không có effect. → V0.2: hoặc nâng cap, hoặc thêm "soft cap" hiển thị diminishing returns.
+3. **Stress 60 (Growth) và 80 (Burnout) thresholds là biên giới mỏng.** Persona 2 ở 59 (Growth, không Survive). Persona 3 ở 79 (Survive, không Burnout). Có thể là chủ ý "close-call narrative", không cần fix — nhưng nếu nhiều tester thật cảm thấy ending sai, cần thêm padding.
+4. **Day 6 OT (EV26) là safety net thật cho money** — Persona 5 từ 11 lên 21 nhờ chọn B "tăng vừa phải". Working as intended.
+
+### Proposed fixes — Sprint 11 scope
+
+**Đã fix trong sprint này (small):**
+
+- StatsBar header chữ "Tokyo · 23°C" → "Tokyo · 23:47". Lý do: `23°C` trông như realtime weather data (nhưng không có API, fake) → confusing với người để ý. `23:47` khớp `senderName` của EV01 — narrative metadata cố định, đóng vai "khoảnh khắc bạn đến, vẫn neo đó cả tuần".
+
+**Không fix lần này (cần data thật từ tester):**
+
+- Engine balance — 4/5 persona khớp expected, lệch duy nhất là close-call. Đợi 5–10 tester thật trước khi chỉnh threshold.
+- Stress/Rel cap signal — design issue, defer V0.2.
+- Day 7 chỉ có 2 regular events (validator vẫn cảnh báo) — nội dung fix, không trong scope sprint này.
