@@ -21,7 +21,10 @@ Nếu bạn đã chơi xong (hoặc bỏ giữa) 1 lượt, vui lòng trả lờ
 3. **Bạn có muốn chơi lại không?** Để thử route khác, hay để xem nội dung khác? Nếu không — vì sao? (chán / đủ rồi / không đủ khác biệt)
 4. **Ending bạn nhận được có hợp lý không?** Thấy nó khớp với cách bạn chơi tuần đó không? Nếu cảm giác sai — sai chỗ nào?
 
-Gửi feedback: tạo issue tại https://github.com/pdythanhduy/life-abroad-simulator/issues — hoặc nhắn trực tiếp cho người đã share link cho bạn.
+**Gửi feedback nhanh nhất** — bấm link này, GitHub tự mở form đã điền sẵn:
+👉 https://github.com/pdythanhduy/life-abroad-simulator/issues/new?template=playtest-feedback.md
+
+Hoặc nhắn trực tiếp cho người đã share link cho bạn.
 
 ### Tester docs
 

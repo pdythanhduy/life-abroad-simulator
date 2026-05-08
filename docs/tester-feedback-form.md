@@ -1,6 +1,18 @@
 # Tester Feedback Form — Life Abroad Simulator v0.1
 
-Copy block dưới đây, paste vào tin nhắn / mail / GitHub issue, điền dưới mỗi câu. Câu nào không có gì cũng OK — bỏ trống.
+Có 2 cách gửi feedback. Cách nào dễ với bạn cũng được:
+
+### Cách A — GitHub issue template (recommended, ~2 phút)
+
+Bấm link sau, GitHub tự mở issue với form đã điền sẵn — bạn chỉ trả lời:
+
+👉 **[Mở form trên GitHub](https://github.com/pdythanhduy/life-abroad-simulator/issues/new?template=playtest-feedback.md)**
+
+Cần GitHub account (miễn phí). Labels `playtest` và `feedback` tự apply.
+
+### Cách B — Copy-paste (không cần GitHub account)
+
+Copy block dưới đây, paste vào tin nhắn / mail, điền dưới mỗi câu. Câu nào không có gì cũng OK — bỏ trống.
 
 Thời gian điền: 3–5 phút.
 
@@ -44,10 +56,10 @@ Ending:           ___________  (Belonging / Growth / Survive / Burnout / Go Home
 
 ---
 
-## Gửi về
+## Gửi về (cho cách B)
 
-- **GitHub issue:** https://github.com/pdythanhduy/life-abroad-simulator/issues/new
-  Tiêu đề: `Playtest feedback — <tên/nick>`
+- **GitHub issue (manual):** https://github.com/pdythanhduy/life-abroad-simulator/issues/new
+  Tiêu đề: `Playtest feedback — <tên/nick>`. Labels: `playtest`, `feedback`.
 - Hoặc **nhắn trực tiếp** người đã gửi link cho bạn (Messenger / Zalo / Telegram).
 
 Cảm ơn bạn rất nhiều. 1 phản hồi thật giá trị bằng 100 lần "OK đẹp".
