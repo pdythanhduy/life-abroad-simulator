@@ -23,6 +23,8 @@ Nếu bạn đã chơi xong (hoặc bỏ giữa) 1 lượt, vui lòng trả lờ
 
 Gửi feedback: tạo issue tại https://github.com/pdythanhduy/life-abroad-simulator/issues — hoặc nhắn trực tiếp cho người đã share link cho bạn.
 
+Nếu bạn là người đang tổ chức playtest: dùng template tại [`docs/playtest-feedback.md`](./docs/playtest-feedback.md) — có sẵn bảng ghi tester, 4 câu hỏi, và 5 persona tự test khi chưa đủ người chơi thật.
+
 ## Yêu cầu
 
 - Node.js 18+ (đã test trên Node 22)
