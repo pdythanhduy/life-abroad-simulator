@@ -250,18 +250,74 @@ DevTools → edit JSON của key `las.save.v1`:
 
 ---
 
-## Build mobile (sau MVP)
+## iOS / TestFlight build
 
-```powershell
-npm install @capacitor/core @capacitor/cli
-npx cap init "Life Abroad Simulator" "com.yourname.lifeabroad" --web-dir=dist
-npm install @capacitor/android
-npm run build
-npx cap add android
-npx cap open android
+App iOS dùng **Capacitor wrapper** — bundle Vite `dist/` vào WebView native. Không phải React Native, không có code Swift custom; native shell chỉ là một WebView load thư mục `public/` được copy từ `dist/` lúc sync.
+
+**Quan trọng:** App ship offline, không load Vercel URL. `capacitor.config.ts` cố ý **không có** `server.url`. Vercel deploy chỉ phục vụ web browser; build App Store là self-contained.
+
+### Yêu cầu
+
+- **macOS** + **Xcode 15+**
+- Apple Developer account ($99/năm) để upload TestFlight / App Store
+- (Tuỳ) Apple Silicon Mac để build nhanh hơn
+
+Phần Capacitor scaffold đã chuẩn bị sẵn ở `ios/` (commit lên repo). Mở project trên Mac không cần `cap add ios` lại.
+
+### Workflow trên Mac
+
+Clone repo về Mac rồi:
+
+```bash
+# 1. Cài deps + build dist + sync sang iOS
+npm install
+npm run ios:build
+
+# 2. Mở Xcode workspace
+npm run ios:open
 ```
 
-Trong Android Studio: **Build → Build Bundle(s)/APK(s) → Build APK(s)**.
+Hai lệnh trên là tất cả. `ios:build` chạy validator + tsc + vite build + `cap sync ios` (copy `dist/` → `ios/App/App/public/`). `ios:open` mở `ios/App/App.xcworkspace` trong Xcode.
+
+### Trong Xcode (lần đầu)
+
+1. **Chọn project root** (`App` ở sidebar) → tab **Signing & Capabilities**.
+2. **Team:** chọn Apple Developer Team của bạn.
+3. **Bundle Identifier:** `com.pdythanhduy.lifeabroadsimulator` (đã set sẵn trong `capacitor.config.ts`).
+4. **Automatically manage signing:** tick. Xcode tự tạo provisioning profile.
+5. Bấm ▶ Run trên simulator (vd iPhone 15) để smoke test app khởi chạy đúng và load được dist offline.
+
+### Archive + Upload TestFlight
+
+1. Trong Xcode top bar: chọn target **Any iOS Device (arm64)** thay vì simulator.
+2. Menu **Product → Archive**. Đợi 2–5 phút.
+3. Khi xong, Organizer mở. Bấm **Distribute App** → **App Store Connect** → **Upload**.
+4. Đợi 1–2 phút Xcode upload + signing.
+5. Trên https://appstoreconnect.apple.com → **My Apps** → tạo app mới (nếu lần đầu) với cùng Bundle ID. Đợi build "Processing" xong (~10–30 phút từ Apple side).
+6. Vào tab **TestFlight** → thêm tester (internal/external). Tester nhận invite qua email → cài TestFlight app → cài game.
+
+### Khi sửa code
+
+Sau mỗi lần đụng src/ hoặc events.json:
+
+```bash
+npm run ios:build   # rebuild dist + sync sang ios/App/App/public
+```
+
+Trong Xcode bấm Run lại. Không cần đụng config.
+
+### Files chính
+
+| File / folder | Mục đích |
+|---|---|
+| `capacitor.config.ts` | App ID, app name, web dir. KHÔNG có `server.url`. |
+| `ios/App/App.xcworkspace` | Mở bằng Xcode |
+| `ios/App/App/public/` | Bundle web — auto-regenerated từ `dist/` qua `cap sync`. **Gitignored.** |
+| `ios/.gitignore` | Loại trừ build artifacts, public snapshot, xcuserdata |
+
+### Android build (sau iOS)
+
+Tương tự, chạy `npx cap add android` trên máy có Android Studio. Sẽ làm trong sprint Android riêng.
 
 ## Changelog
 
