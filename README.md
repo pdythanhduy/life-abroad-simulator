@@ -8,9 +8,9 @@ Game mô phỏng cuộc sống xa quê dạng chat. Season 1: Year One Abroad (7
 
 **Live:** https://life-abroad-simulator.vercel.app
 
-Đây là bản đầu tiên public để chơi thử. Story hoàn chỉnh từ Day 1 đến cả 5 ending, mobile-friendly, save lưu local theo browser/device.
+Season 1: Year One Abroad — bản **7-day public playtest**. Một lượt chơi 20–30 phút trên điện thoại. Có **5 ending** khác nhau; chơi lại với khẩu vị khác để mở dần collection (hiển thị trên Ending screen, lưu local). Save persist theo browser/device, không cloud sync.
 
-**Chưa có ở milestone này:** sound, art (chỉ vibe placeholder), cloud sync, account, payment, analytics. Content vẫn trong 1 file `events.json` — sẽ tách per-day khi bắt đầu V2 (30 ngày).
+**Chưa có ở milestone này:** sound, art (chỉ vibe placeholder), cloud sync, account, payment, analytics, **Day 8 (tuần thứ hai) thật sự** — chỉ có teaser. Content vẫn trong 1 file `events.json` — sẽ tách per-day khi bắt đầu V0.2 (30 ngày).
 
 ## Phản hồi cần nhất
 

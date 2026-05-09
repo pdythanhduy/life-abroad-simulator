@@ -21,6 +21,7 @@ export default function App() {
     tutorialSeen,
     markTutorialSeen,
     continueFromRecap,
+    unlockedEndings,
   } = useGame();
 
   const safeStart = (d: Parameters<typeof start>[0]) => {
@@ -71,7 +72,11 @@ export default function App() {
           <SettingsScreen onBack={() => setScreen("home")} onReset={reset} />
         )}
         {screen === "ending" && state && (
-          <EndingScreen state={state} onRestart={reset} />
+          <EndingScreen
+            state={state}
+            unlockedEndings={unlockedEndings}
+            onRestart={reset}
+          />
         )}
       </div>
     </div>

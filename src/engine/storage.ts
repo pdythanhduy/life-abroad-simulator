@@ -1,6 +1,15 @@
-import type { SaveState, Stats } from "../types/game";
+import type { EndingId, SaveState, Stats } from "../types/game";
 
 const KEY = "las.save.v1";
+const ENDINGS_KEY = "las.endings.unlocked.v1";
+
+const VALID_ENDING_IDS: readonly EndingId[] = [
+  "survive",
+  "burnout",
+  "gohome",
+  "growth",
+  "belonging",
+];
 
 const DEFAULT_STATS: Stats = {
   money: 50,
@@ -68,4 +77,35 @@ export function clearGame(): void {
   } catch {
     // ignore
   }
+}
+
+// Endings collection — separate key from save state on purpose. Player keeps
+// their meta-progression even when they reset the active save. Old saves
+// pre-Sprint 14 simply load as an empty list (no migration needed).
+export function loadUnlockedEndings(): EndingId[] {
+  try {
+    const raw = localStorage.getItem(ENDINGS_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return [];
+    return parsed.filter(
+      (e): e is EndingId =>
+        typeof e === "string" &&
+        (VALID_ENDING_IDS as readonly string[]).includes(e),
+    );
+  } catch {
+    return [];
+  }
+}
+
+export function unlockEnding(id: EndingId): EndingId[] {
+  const current = loadUnlockedEndings();
+  if (current.includes(id)) return current;
+  const updated = [...current, id];
+  try {
+    localStorage.setItem(ENDINGS_KEY, JSON.stringify(updated));
+  } catch {
+    // ignore
+  }
+  return updated;
 }
