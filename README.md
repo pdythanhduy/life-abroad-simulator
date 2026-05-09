@@ -315,6 +315,30 @@ Trong Xcode bấm Run lại. Không cần đụng config.
 | `ios/App/App/public/` | Bundle web — auto-regenerated từ `dist/` qua `cap sync`. **Gitignored.** |
 | `ios/.gitignore` | Loại trừ build artifacts, public snapshot, xcuserdata |
 
+### iOS assets — App icon + Splash
+
+Source-of-truth committed ở `assets/`:
+
+| File | Mục đích | Kích thước |
+|---|---|---|
+| `assets/icon.png` | App icon source (full-bleed, không nền trong suốt) | ≥ 1024×1024 |
+| `assets/splash.png` | Splash screen — nền `#05070b` (dark navy), icon ở giữa, không text | 2732×2732 |
+
+Tool `@capacitor/assets` đọc 2 file này, generate ra:
+
+- `ios/App/App/Assets.xcassets/AppIcon.appiconset/AppIcon-512@2x.png` (1024×1024 — iOS 14+ single-icon convention, Xcode auto-scale cho mọi home/spotlight/settings size)
+- `ios/App/App/Assets.xcassets/Splash.imageset/Default@{1,2,3}x~universal~anyany{,-dark}.png` (6 file: 3 light scale × 2 light/dark mode)
+
+**Khi muốn đổi icon hoặc splash:**
+
+```powershell
+# Thay assets/icon.png và/hoặc assets/splash.png bằng file mới (giữ kích thước)
+npx capacitor-assets generate --ios
+npx cap sync ios
+```
+
+Để tạo lại splash từ icon mới (Windows, không cần Photoshop), dùng PowerShell + System.Drawing — xem commit `Sprint iOS 2` trong git log để copy snippet.
+
 ### Android build (sau iOS)
 
 Tương tự, chạy `npx cap add android` trên máy có Android Studio. Sẽ làm trong sprint Android riêng.
