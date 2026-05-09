@@ -265,6 +265,19 @@ Trong Android Studio: **Build → Build Bundle(s)/APK(s) → Build APK(s)**.
 
 ## Changelog
 
+### v0.1.1 — Ending Collection
+
+Headline: ending unlocks persist across reset, Day 8 teaser, replay CTA improved.
+
+| Sprint | Highlight |
+|---|---|
+| 10 | Feedback intake template (`docs/playtest-feedback.md`) — table for testers + 5 self-test personas |
+| 11 | 5-persona self-playtest run 1 + StatsBar metadata fix (`Tokyo · 23°C` → `Tokyo · 23:47`, no fake realtime) |
+| 12 | Go Home ending path verified via Persona 6 (Hard, money tank); 5/5 endings reachable |
+| 13 | Validation sprint: StatsBar MAX/MIN cap indicator + tester package (`tester-guide.md`, `tester-feedback-form.md`, `social-drafts.md`, `analytics-v0.md`) |
+| 14b | GitHub issue template (`.github/ISSUE_TEMPLATE/playtest-feedback.md`) — one-click feedback with auto-applied labels |
+| 14 | **Ending Collection** — `las.endings.unlocked.v1` storage separate from save, EndingScreen shows X/5 collection + locked/unlocked rows + Day 8 teaser; "Chơi lại để mở ending khác" smart CTA |
+
 ### v0.1.0 — Public Playtest
 
 | Sprint | Highlight |
