@@ -69,7 +69,7 @@ Nếu bạn vừa trải qua giai đoạn cảm xúc khó — game có thể ch�
 
 Game tự lưu 1 save duy nhất. Để chơi lượt mới:
 
-- **Settings → Reset toàn bộ** (xoá save, không xoá tutorial-seen).
+- **Settings → Xoá lượt chơi hiện tại** (xoá save hiện tại; **giữ** Ending Collection và tutorial-seen).
 - Hoặc kết thúc 1 ending → bấm "Chơi lại" → tự reset.
 
 Mỗi lượt có thể ra ending khác tuỳ lựa chọn. Khuyến khích chơi lại 1 lần với khẩu vị khác hẳn để cảm nhận game phản chiếu khác biệt.

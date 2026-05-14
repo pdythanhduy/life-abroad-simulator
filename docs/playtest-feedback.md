@@ -61,7 +61,7 @@ Cột `Confusing`: chỗ player phải đọc 2–3 lần mới hiểu, hoặc b
 
 Tự chơi 5 lượt, mỗi lượt nhập vai 1 persona dưới đây. Mỗi persona = 1 nhân cách giả định + 1 difficulty + 1 "khẩu vị lựa chọn" rõ. Mục tiêu: xem game có phản chiếu được nhân cách đó qua ending không.
 
-Mỗi lượt mất ~20 phút. Reset save sau mỗi lượt (Settings → Reset toàn bộ).
+Mỗi lượt mất ~20 phút. Reset save sau mỗi lượt (Settings → **Xoá lượt chơi hiện tại** — Ending Collection vẫn được giữ qua nhiều lượt để tester thấy progress mở dần).
 
 ### Persona 1 — "Người con ngoan"
 - **Difficulty:** Easy

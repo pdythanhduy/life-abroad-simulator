@@ -142,7 +142,7 @@ Game không có backend. Toàn bộ tiến trình lưu trong **localStorage củ
 
 Không có cloud sync trong MVP. Có thể thêm trong V2+ (vd Supabase free tier) nếu thực sự cần share save giữa thiết bị — nhưng kéo theo backend, auth, account → nghĩ kỹ trước khi làm.
 
-Trong app: Settings → **Reset toàn bộ** xoá save thủ công.
+Trong app: Settings → **Xoá lượt chơi hiện tại** xoá save thủ công. Ending Collection (`las.endings.unlocked.v1`) được giữ riêng để player vẫn mở đủ 5 ending qua nhiều lượt.
 
 ## Cấu trúc
 
@@ -252,10 +252,12 @@ DevTools → edit JSON của key `las.save.v1`:
 - [ ] SVG scene silhouette không che chat bubble (opacity ≤ 30%, vẫn đọc được text Japanese dài).
 - [ ] Refresh sau khi tắt sound → vẫn tắt (`las.sound.v1` persist).
 
-### 10. Reset toàn bộ
+### 10. Xoá lượt chơi hiện tại
 
-- [ ] Settings → **Reset toàn bộ** → confirm → save bị xoá → về Home.
+- [ ] Settings → **Xoá lượt chơi hiện tại** → confirm → save bị xoá → về Home.
 - [ ] Sau reset, "Tiếp tục" không hiện. Tutorial-seen flag vẫn giữ (không show lại).
+- [ ] Helper text dưới nút ghi rõ "Ending Collection vẫn được giữ…".
+- [ ] Mở DevTools → Application → Local Storage → `las.endings.unlocked.v1` vẫn còn nguyên sau khi reset (không bị xoá cùng save).
 
 ---
 
@@ -353,6 +355,17 @@ npx cap sync ios
 Tương tự, chạy `npx cap add android` trên máy có Android Studio. Sẽ làm trong sprint Android riêng.
 
 ## Changelog
+
+### v0.2.2 — Reset wording clarity
+
+Settings reset button used to read "Reset toàn bộ", which testers read as
+"wipes everything including endings". Behaviour was always to keep
+`las.endings.unlocked.v1`, but the label didn't say so. v0.2.2 makes the
+copy honest.
+
+| Sprint | Highlight |
+|---|---|
+| 16 | `SettingsScreen.tsx` button label `"Reset toàn bộ"` → `"Xoá lượt chơi hiện tại"`. Confirm dialog now says `"Xoá lượt chơi hiện tại? Ending Collection vẫn được giữ."`. Helper text under the button: `"Ending Collection vẫn được giữ để bạn mở đủ 5 kết thúc."`. No behaviour change — `clearGame()` already only touches `las.save.v1`. README + docs/tester-guide.md + docs/playtest-feedback.md updated to use new wording. New `docs/post-mvp-todos.md` records the deferred "wipe Ending Collection" option (no new button shipped). |
 
 ### v0.2.1 — Audio softened + Scene art prominent
 

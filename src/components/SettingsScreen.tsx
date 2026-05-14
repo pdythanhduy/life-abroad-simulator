@@ -28,7 +28,7 @@ export default function SettingsScreen({
         <div className="border border-line rounded-xl p-4 bg-panel">
           <div className="text-sm font-medium">Phiên bản</div>
           <div className="text-xs text-soft mt-1">
-            v0.2.1 — Season 1: Year One Abroad (7 ngày)
+            v0.2.2 — Season 1: Year One Abroad (7 ngày)
           </div>
         </div>
 
@@ -57,14 +57,19 @@ export default function SettingsScreen({
           </span>
         </button>
 
-        <button
-          onClick={() => {
-            if (confirm("Xoá toàn bộ tiến trình?")) onReset();
-          }}
-          className="w-full py-3 rounded-xl bg-rose-500/20 border border-rose-400/30 text-rose-200 min-h-[48px]"
-        >
-          Reset toàn bộ
-        </button>
+        <div className="space-y-1.5">
+          <button
+            onClick={() => {
+              if (confirm("Xoá lượt chơi hiện tại? Ending Collection vẫn được giữ.")) onReset();
+            }}
+            className="w-full py-3 rounded-xl bg-rose-500/20 border border-rose-400/30 text-rose-200 min-h-[48px]"
+          >
+            Xoá lượt chơi hiện tại
+          </button>
+          <div className="text-[11px] text-soft px-1 leading-snug">
+            Ending Collection vẫn được giữ để bạn mở đủ 5 kết thúc.
+          </div>
+        </div>
       </div>
     </div>
   );
