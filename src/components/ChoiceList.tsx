@@ -25,15 +25,15 @@ export default function ChoiceList({
   onPick: (c: Choice) => void;
 }) {
   return (
-    <div className="px-3 pt-2 pb-safe space-y-2 border-t border-line bg-panel/80 backdrop-blur">
+    <div className="px-3 pt-2 pb-safe space-y-2 border-t border-line bg-[#0a0d12]/85 backdrop-blur-md">
       {choices.map((c) => (
         <button
           key={c.id}
           onClick={() => onPick(c)}
-          className="w-full text-left rounded-xl border border-line bg-ink/60 hover:bg-line transition px-3 py-3 active:scale-[.99] min-h-[56px]"
+          className="w-full text-left rounded-xl border border-line bg-[#11141b]/90 hover:border-accent/60 transition px-3 py-3 active:scale-[.99] min-h-[56px] shadow-md shadow-black/40"
         >
-          <div className="text-sm break-words [overflow-wrap:anywhere] leading-snug">{c.text}</div>
-          <div className="text-[11px] text-soft mt-1 tracking-wide break-words leading-snug">
+          <div className="text-sm text-white/95 break-words [overflow-wrap:anywhere] leading-snug">{c.text}</div>
+          <div className="text-[11px] text-white/70 mt-1 tracking-wide break-words leading-snug">
             {formatEffect(c.statEffects) || "—"}
           </div>
         </button>

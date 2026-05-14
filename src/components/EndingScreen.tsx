@@ -1,5 +1,7 @@
+import { useEffect } from "react";
 import { ENDINGS } from "../engine/endings";
 import type { EndingId, SaveState } from "../types/game";
+import { playEnding, stopAll } from "../engine/audio";
 
 // Display order — warmest → bleakest. Reads as a small narrative.
 const ALL_ENDINGS: EndingId[] = [
@@ -20,6 +22,14 @@ export default function EndingScreen({
   onRestart: () => void;
 }) {
   const info = state.ending ? ENDINGS[state.ending] : null;
+
+  useEffect(() => {
+    if (state.ending) playEnding(state.ending);
+    return () => {
+      stopAll();
+    };
+  }, [state.ending]);
+
   if (!info) return null;
 
   const unlocked = new Set(unlockedEndings);

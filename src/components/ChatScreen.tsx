@@ -3,17 +3,10 @@ import type { Choice, GameEvent, SaveState } from "../types/game";
 import StatsBar from "./StatsBar";
 import MessageBubble from "./MessageBubble";
 import ChoiceList from "./ChoiceList";
+import SceneBackground from "./SceneBackground";
 import { resolveEvent } from "../engine/engine";
 import type { Screen } from "../hooks/useGame";
-
-const BG: Record<string, string> = {
-  tiny_room:     "from-[#0e1118] to-[#1a1d28]",
-  konbini:       "from-[#0e1726] to-[#152033]",
-  station_night: "from-[#0a0d16] to-[#181c2c]",
-  office:        "from-[#16131a] to-[#1f1c26]",
-  rainy_street:  "from-[#0c1014] to-[#161b22]",
-  cityhall:      "from-[#11140e] to-[#1c2017]",
-};
+import { playPing, setAmbientScene, stopAll } from "../engine/audio";
 
 export default function ChatScreen({
   state,
@@ -39,14 +32,30 @@ export default function ChatScreen({
   useEffect(() => {
     setRevealed(0);
     if (!event || messages.length === 0) return;
+    // First message reveals ~120ms after event change so the scene can settle.
     let i = 0;
     const id = setInterval(() => {
       i += 1;
       setRevealed(i);
+      playPing();
       if (i >= messages.length) clearInterval(id);
     }, 650);
     return () => clearInterval(id);
   }, [event?.id, messages.length]);
+
+  // Ambient drone follows the event's background. setAmbientScene cross-fades
+  // when the scene id actually changes and is a no-op if it's the same scene,
+  // so no extra deduping needed here.
+  useEffect(() => {
+    setAmbientScene(event?.background ?? "tiny_room");
+  }, [event?.background]);
+
+  // Stop all audio when the chat screen unmounts (back to home, ending, etc).
+  useEffect(() => {
+    return () => {
+      stopAll();
+    };
+  }, []);
 
   useEffect(() => {
     scroller.current?.scrollTo({
@@ -56,11 +65,12 @@ export default function ChatScreen({
   }, [revealed]);
 
   const bgKey = event?.background ?? "tiny_room";
-  const bg = BG[bgKey] ?? BG.tiny_room;
   const showChoices = !!event && revealed >= messages.length;
 
   return (
-    <div className={`flex flex-col h-full bg-gradient-to-b ${bg}`}>
+    <div className="relative flex flex-col h-full">
+      <SceneBackground sceneKey={bgKey} />
+      <div className="relative flex flex-col h-full">
       <div className="flex items-center justify-between px-2 bg-panel/70 border-b border-line">
         <button
           onClick={() => setScreen("home")}
@@ -97,6 +107,7 @@ export default function ChatScreen({
       </div>
 
       {showChoices && <ChoiceList choices={choices} onPick={onPick} />}
+      </div>
     </div>
   );
 }

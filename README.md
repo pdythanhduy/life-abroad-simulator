@@ -10,7 +10,7 @@ Game mô phỏng cuộc sống xa quê dạng chat. Season 1: Year One Abroad (7
 
 Season 1: Year One Abroad — bản **7-day public playtest**. Một lượt chơi 20–30 phút trên điện thoại. Có **5 ending** khác nhau; chơi lại với khẩu vị khác để mở dần collection (hiển thị trên Ending screen, lưu local). Save persist theo browser/device, không cloud sync.
 
-**Chưa có ở milestone này:** sound, art (chỉ vibe placeholder), cloud sync, account, payment, analytics, **Day 8 (tuần thứ hai) thật sự** — chỉ có teaser. Content vẫn trong 1 file `events.json` — sẽ tách per-day khi bắt đầu V0.2 (30 ngày).
+**Chưa có ở milestone này:** cloud sync, account, payment, analytics, **Day 8 (tuần thứ hai) thật sự** — chỉ có teaser. Content vẫn trong 1 file `events.json` — sẽ tách per-day khi bắt đầu V0.2 (30 ngày). *Sound + scene art đã thêm ở v0.2.0 (Sprint 16) — procedural, không cần file ngoài.*
 
 ## Phản hồi cần nhất
 
@@ -243,7 +243,16 @@ DevTools → edit JSON của key `las.save.v1`:
 - [ ] DayRecap không bị clip ở chiều cao ngắn.
 - [ ] Dark mode default, không có flash trắng khi chuyển screen.
 
-### 9. Reset toàn bộ
+### 9. Sound + scene art (v0.2.0+)
+
+- [ ] Settings → toggle "Âm thanh" off → ping ngừng ngay; bật lại → ping nghe được ở message tiếp theo.
+- [ ] Mỗi event chuyển scene khác (vd EV01 station_night → EV02 tiny_room) → ambient drone cross-fade, không cắt cụt.
+- [ ] EndingScreen: nghe được chord pad chậm; mỗi ending khác progression (Belonging warm major7 vs Burnout dissonant cluster).
+- [ ] Back từ ChatScreen về Home → ambient stop; back từ EndingScreen → ending music stop.
+- [ ] SVG scene silhouette không che chat bubble (opacity ≤ 30%, vẫn đọc được text Japanese dài).
+- [ ] Refresh sau khi tắt sound → vẫn tắt (`las.sound.v1` persist).
+
+### 10. Reset toàn bộ
 
 - [ ] Settings → **Reset toàn bộ** → confirm → save bị xoá → về Home.
 - [ ] Sau reset, "Tiếp tục" không hiện. Tutorial-seen flag vẫn giữ (không show lại).
@@ -344,6 +353,21 @@ npx cap sync ios
 Tương tự, chạy `npx cap add android` trên máy có Android Studio. Sẽ làm trong sprint Android riêng.
 
 ## Changelog
+
+### v0.2.1 — Audio softened + Scene art prominent
+
+Playtest of v0.2.0 said the ambient drones felt creepy ("nghe ghê") and the SVG silhouettes were too faint. v0.2.1 strips audio back to soft ping + one warm chord on ending, adds an image layer (`public/scenes/{key}.jpg`) on top of the silhouette, and adds CSS animated overlays.
+
+| Sprint | Highlight |
+|---|---|
+| 17a | `engine/audio.ts` rewritten: removed ambient drones entirely (`setAmbientScene` is now a no-op kept for API compat), softened ping (sine + fifth, 0.05 peak gain), replaced ending chord-pad loop with one 6s warm chord per ending (no dissonance, no loop). |
+| 17b | `components/SceneBackground.tsx` adds image layer — probes `/scenes/{key}.jpg` via `new Image()`, fades in over 700ms when loaded, falls back to SVG silhouette when missing. SVG silhouettes also bumped to opacity 0.45–0.55 (from 0.25) so the fallback feels intentional. Bottom legibility gradient added so chat bubbles stay readable over any photo. |
+| 17c | Animated CSS overlays per scene: rain streaks (rainy_street + station_night), lightning flash (rainy_street), bat silhouette flyby (station_night), train light sweep (station_night), fluorescent flicker (konbini, cityhall), dust motes drift (tiny_room), monitor pulse (office). All keyframes in `index.css`. |
+| 17d | `public/scenes/README.md` — drop-in instructions for the 6 image files (1080×1920 JPG, < 300KB each). User adds files; no code change needed. |
+
+### v0.2.0 — Sound + Scene Art
+
+Initial Sprint 16 work: Web Audio synth (ping + ambient drone + ending chord pad) and SVG silhouette scenes. Superseded by v0.2.1 audio rewrite — see entry above. Settings toggle (`las.sound.v1`) introduced in this version is still in use.
 
 ### v0.1.1 — Ending Collection
 
